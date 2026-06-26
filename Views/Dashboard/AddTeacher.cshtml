@@ -8,7 +8,7 @@
 
     @Html.ValidationSummary(true, "", new { style="color:red; margin-bottom:15px; font-weight:bold;" })
 
-    <form method="post" action="/Dashboard/AddTeacher">
+    <form method="post" action="/Dashboard/AddTeacher" enctype="multipart/form-data">
         <div style="margin-bottom: 20px;">
             <label class="form-label" for="Name">الاسم الرباعي</label>
             <input type="text" class="form-control" id="Name" name="Name" placeholder="أدخل اسم المعلم..." required />
@@ -32,6 +32,11 @@
         <div style="margin-bottom: 24px;">
             <label class="form-label" for="Description">نبذة عن المعلم</label>
             <textarea class="form-control" id="Description" name="Description" rows="4" placeholder="اكتب نبذة مختصرة عن المعلم..."></textarea>
+        </div>
+
+        <div style="margin-bottom: 24px;">
+            <label class="form-label" for="ProfileImage">صورة المعلم</label>
+            <input type="file" class="form-control" id="ProfileImage" name="ProfileImage" accept="image/*" style="padding:8px" />
         </div>
 
         <div style="display:flex; justify-content: flex-end; gap:10px;">

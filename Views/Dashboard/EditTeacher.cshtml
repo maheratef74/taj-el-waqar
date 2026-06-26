@@ -9,7 +9,7 @@
 
     @Html.ValidationSummary(true, "", new { style="color:red; margin-bottom:15px; font-weight:bold;" })
 
-    <form method="post" action="/Dashboard/EditTeacher">
+    <form method="post" action="/Dashboard/EditTeacher" enctype="multipart/form-data">
         <input type="hidden" name="id" value="@Model.Id" />
         
         <div style="margin-bottom: 20px;">
@@ -35,6 +35,15 @@
         <div style="margin-bottom: 24px;">
             <label class="form-label" for="Description">نبذة عن المعلم</label>
             <textarea class="form-control" id="Description" name="Description" rows="4" placeholder="اكتب نبذة مختصرة عن المعلم...">@Model.Description</textarea>
+        </div>
+
+        <div style="margin-bottom: 24px;">
+            <label class="form-label" for="ProfileImage">صورة المعلم</label>
+            <input type="file" class="form-control" id="ProfileImage" name="ProfileImage" accept="image/*" style="padding:8px" />
+            @if (!string.IsNullOrEmpty(Model.ProfileImageUrl))
+            {
+                <div style="margin-top:8px"><img src="@Model.ProfileImageUrl" style="width:60px;height:60px;border-radius:50%;object-fit:cover" /></div>
+            }
         </div>
 
         <div style="display:flex; justify-content: flex-end; gap:10px;">

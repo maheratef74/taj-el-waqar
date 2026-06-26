@@ -368,12 +368,26 @@ namespace ElMaherQuranSchool.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddTeacher(string Name, string PhoneNumber, string Description, string Role, int SortOrder)
+        public async Task<IActionResult> AddTeacher(string Name, string PhoneNumber, string Description, string Role, int SortOrder, IFormFile? ProfileImage)
         {
             if (string.IsNullOrWhiteSpace(Name))
             {
                 ModelState.AddModelError("", "اسم المعلم مطلوب");
                 return View();
+            }
+
+            string? imageUrl = null;
+            if (ProfileImage != null && ProfileImage.Length > 0)
+            {
+                string uploadsDir = Path.Combine(_hostEnvironment.WebRootPath, "uploads", "teachers");
+                if (!Directory.Exists(uploadsDir)) Directory.CreateDirectory(uploadsDir);
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(ProfileImage.FileName);
+                string filePath = Path.Combine(uploadsDir, fileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await ProfileImage.CopyToAsync(stream);
+                }
+                imageUrl = "/uploads/teachers/" + fileName;
             }
 
             var teacher = new Teacher
@@ -382,7 +396,8 @@ namespace ElMaherQuranSchool.Controllers
                 PhoneNumber = PhoneNumber ?? string.Empty,
                 Description = Description ?? string.Empty,
                 Role = Role,
-                SortOrder = SortOrder
+                SortOrder = SortOrder,
+                ProfileImageUrl = imageUrl
             };
 
             _context.Teachers.Add(teacher);
@@ -400,7 +415,7 @@ namespace ElMaherQuranSchool.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditTeacher(int id, string Name, string PhoneNumber, string Description, string Role, int SortOrder)
+        public async Task<IActionResult> EditTeacher(int id, string Name, string PhoneNumber, string Description, string Role, int SortOrder, IFormFile? ProfileImage)
         {
             var teacher = await _context.Teachers.FindAsync(id);
             if (teacher == null) return NotFound();
@@ -409,6 +424,19 @@ namespace ElMaherQuranSchool.Controllers
             {
                 ModelState.AddModelError("", "اسم المعلم مطلوب");
                 return View(teacher);
+            }
+
+            if (ProfileImage != null && ProfileImage.Length > 0)
+            {
+                string uploadsDir = Path.Combine(_hostEnvironment.WebRootPath, "uploads", "teachers");
+                if (!Directory.Exists(uploadsDir)) Directory.CreateDirectory(uploadsDir);
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(ProfileImage.FileName);
+                string filePath = Path.Combine(uploadsDir, fileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await ProfileImage.CopyToAsync(stream);
+                }
+                teacher.ProfileImageUrl = "/uploads/teachers/" + fileName;
             }
 
             teacher.Name = Name;

@@ -10,21 +10,21 @@
   "theme_color": "#357434",
   "icons": [
     {
-      "src": "/image/app_logo.svg",
+      "src": "/image/taj-el-waqar-logo.jpg",
       "sizes": "192x192",
-      "type": "image/svg+xml",
+      "type": "image/jpeg",
       "purpose": "any"
     },
     {
-      "src": "/image/app_logo.svg",
+      "src": "/image/taj-el-waqar-logo.jpg",
       "sizes": "512x512",
-      "type": "image/svg+xml",
+      "type": "image/jpeg",
       "purpose": "any"
     },
     {
-      "src": "/image/app_logo.svg",
+      "src": "/image/taj-el-waqar-logo.jpg",
       "sizes": "any",
-      "type": "image/svg+xml",
+      "type": "image/jpeg",
       "purpose": "maskable"
     }
   ]
