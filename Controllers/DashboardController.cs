@@ -1,0 +1,623 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ElMaherQuranSchool.Data;
+using ElMaherQuranSchool.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+
+namespace ElMaherQuranSchool.Controllers
+{
+    [Authorize]
+    public class DashboardController : Controller
+    {
+        private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _hostEnvironment;
+
+        public DashboardController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment)
+        {
+            _context = context;
+            _hostEnvironment = hostEnvironment;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            ViewBag.TotalStudents = await _context.Students.CountAsync();
+            ViewBag.TotalHalaqas = await _context.Halaqas.CountAsync();
+            ViewBag.TotalTeachers = await _context.Teachers.CountAsync();
+            ViewBag.PendingRequests = await _context.RegistrationRequests.CountAsync(r => r.Status == RegistrationStatus.Pending);
+            return View();
+        }
+
+        public async Task<IActionResult> Students(string search, int? halaqaId)
+        {
+            var query = _context.Students.Include(s => s.Halaqa).AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                query = query.Where(s => s.Name.StartsWith(search) || s.SerialNumber.StartsWith(search));
+            }
+
+            if (halaqaId.HasValue)
+            {
+                query = query.Where(s => s.HalaqaId == halaqaId.Value);
+            }
+
+            var students = await query
+                .OrderByDescending(s => s.CreatedAt)
+                .ToListAsync();
+
+            ViewBag.Halaqas = await _context.Halaqas.ToListAsync();
+            ViewBag.Search = search;
+            ViewBag.HalaqaId = halaqaId;
+
+            return View(students);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddStudent()
+        {
+            ViewBag.Halaqas = await _context.Halaqas.ToListAsync();
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddStudent(string Name, int? HalaqaId, Gender gender, int TotalMemorizedPages = 0, string ParentPhone = "", IFormFile? profileImage = null)
+        {
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                ModelState.AddModelError("", "اسم الطالب مطلوب");
+                ViewBag.Halaqas = await _context.Halaqas.ToListAsync();
+                return View();
+            }
+
+            string? imageUrl = null;
+            if (profileImage != null && profileImage.Length > 0)
+            {
+                string webRoot = _hostEnvironment.WebRootPath;
+                // Double wwwroot check (common in some hosting environments)
+                if (webRoot.EndsWith("wwwroot") && Directory.Exists(Path.Combine(webRoot, "..", "wwwroot")) && webRoot.Contains("\\wwwroot\\wwwroot"))
+                {
+                   // This is a sign of nesting. In most cases, we want to save into the parent's wwwroot if available.
+                   // But let's just make sure we save to whatever WebRootPath is actually served.
+                }
+
+                string uploadsDir = Path.Combine(webRoot, "uploads", "students");
+                
+                if (!Directory.Exists(uploadsDir)) Directory.CreateDirectory(uploadsDir);
+
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(profileImage.FileName);
+                string filePath = Path.Combine(uploadsDir, fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await profileImage.CopyToAsync(stream);
+                }
+                imageUrl = "/uploads/students/" + fileName;
+            }
+
+            // Generate Serial Number starting from 1 logic
+            var maxId = await _context.Students.AnyAsync() ? await _context.Students.MaxAsync(s => s.Id) : 0;
+            string serialNumber = (maxId + 1).ToString();
+
+            var student = new Student
+            {
+                Name = Name,
+                ParentPhone = ParentPhone ?? string.Empty,
+                SerialNumber = serialNumber,
+                TotalMemorizedPages = TotalMemorizedPages,
+                HalaqaId = HalaqaId,
+                ProfileImageUrl = imageUrl,
+                Gender = gender
+            };
+
+            _context.Students.Add(student);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Students");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditStudent(int id)
+        {
+            var student = await _context.Students.FindAsync(id);
+            if (student == null) return NotFound();
+            ViewBag.Halaqas = await _context.Halaqas.ToListAsync();
+            return View(student);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditStudent(int id, string Name, int? HalaqaId, Gender gender, int TotalMemorizedPages, string ParentPhone, IFormFile? profileImage)
+        {
+            var student = await _context.Students.FindAsync(id);
+            if (student == null) return NotFound();
+
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                ModelState.AddModelError("", "اسم الطالب مطلوب");
+                ViewBag.Halaqas = await _context.Halaqas.ToListAsync();
+                return View(student);
+            }
+
+            if (profileImage != null && profileImage.Length > 0)
+            {
+                // Delete old image if it exists
+                if (!string.IsNullOrEmpty(student.ProfileImageUrl))
+                {
+                    string oldPath = Path.Combine(_hostEnvironment.WebRootPath, student.ProfileImageUrl.TrimStart('/'));
+                    if (System.IO.File.Exists(oldPath)) System.IO.File.Delete(oldPath);
+                }
+
+                string webRoot = _hostEnvironment.WebRootPath;
+                string uploadsDir = Path.Combine(webRoot, "uploads", "students");
+                
+                if (!Directory.Exists(uploadsDir)) Directory.CreateDirectory(uploadsDir);
+
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(profileImage.FileName);
+                string filePath = Path.Combine(uploadsDir, fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await profileImage.CopyToAsync(stream);
+                }
+                student.ProfileImageUrl = "/uploads/students/" + fileName;
+            }
+
+            student.Name = Name;
+            student.ParentPhone = ParentPhone ?? string.Empty;
+            student.HalaqaId = HalaqaId;
+            student.TotalMemorizedPages = TotalMemorizedPages;
+            student.Gender = gender;
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Students");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteStudent(int id)
+        {
+            var student = await _context.Students
+                .Include(s => s.SessionRecords)
+                .Include(s => s.ParentStudents)
+                .FirstOrDefaultAsync(s => s.Id == id);
+
+            if (student == null) return NotFound();
+
+            // Delete associated records first (due to Restrict constraint)
+            if (student.SessionRecords.Any())
+            {
+                _context.SessionRecords.RemoveRange(student.SessionRecords);
+            }
+
+            if (student.ParentStudents.Any())
+            {
+                _context.ParentStudents.RemoveRange(student.ParentStudents);
+            }
+
+            // Delete profile image
+            if (!string.IsNullOrEmpty(student.ProfileImageUrl))
+            {
+                string imagePath = Path.Combine(_hostEnvironment.WebRootPath, student.ProfileImageUrl.TrimStart('/'));
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
+            }
+
+            _context.Students.Remove(student);
+            await _context.SaveChangesAsync();
+
+            TempData["Success"] = "تم حذف الطالب بنجاح.";
+            return RedirectToAction("Students");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> StudentProgress(int id)
+        {
+            var student = await _context.Students
+                .Include(s => s.Halaqa)
+                .Include(s => s.SessionRecords)
+                    .ThenInclude(sr => sr.Session)
+                .FirstOrDefaultAsync(s => s.Id == id);
+
+            if (student == null) return NotFound();
+
+            student.SessionRecords = student.SessionRecords.OrderByDescending(sr => sr.Session.SessionDate).ToList();
+
+            return View(student);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddSessionRecord(int studentId, DateTime sessionDate, bool isPresent, int attendanceScore, int memorizationScore, string teacherNote)
+        {
+            var student = await _context.Students.FirstOrDefaultAsync(s => s.Id == studentId);
+            if (student == null) return NotFound();
+            
+            if (student.HalaqaId == null)
+            {
+                TempData["Error"] = "الطالب غير مسجل في حلقة، لا يمكن تسجيل حضوره.";
+                return RedirectToAction("StudentProgress", new { id = studentId });
+            }
+
+            var session = await _context.Sessions.FirstOrDefaultAsync(s => s.HalaqaId == student.HalaqaId && s.SessionDate.Date == sessionDate.Date);
+
+            if (session == null)
+            {
+                session = new Session
+                {
+                    HalaqaId = student.HalaqaId.Value,
+                    SessionDate = sessionDate.Date
+                };
+                _context.Sessions.Add(session);
+                await _context.SaveChangesAsync();
+            }
+
+            var existingRecord = await _context.SessionRecords.FirstOrDefaultAsync(sr => sr.SessionId == session.Id && sr.StudentId == studentId);
+            if (existingRecord != null)
+            {
+                TempData["Error"] = "تم تسجيل الحضور لهذا الطالب في هذا اليوم مسبقاً.";
+                return RedirectToAction("StudentProgress", new { id = studentId });
+            }
+
+            var record = new SessionRecord
+            {
+                SessionId = session.Id,
+                StudentId = studentId,
+                IsPresent = isPresent,
+                AttendanceScore = attendanceScore,
+                MemorizationScore = memorizationScore,
+                TeacherNote = teacherNote ?? string.Empty
+            };
+
+            // Update student's point progress
+            student.PointProgress += attendanceScore;
+
+            _context.SessionRecords.Add(record);
+            await _context.SaveChangesAsync();
+
+            TempData["Success"] = "تم تسجيل الحضور بنجاح.";
+            return RedirectToAction("StudentProgress", new { id = studentId });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteSessionRecord(int recordId)
+        {
+            var record = await _context.SessionRecords.Include(sr => sr.Student).FirstOrDefaultAsync(sr => sr.Id == recordId);
+            if (record == null) return NotFound();
+
+            int studentId = record.StudentId;
+            var student = record.Student;
+
+            // Minimize students' points
+            if (student != null)
+            {
+                student.PointProgress -= record.AttendanceScore;
+                if (student.PointProgress < 0) student.PointProgress = 0;
+            }
+
+            _context.SessionRecords.Remove(record);
+            await _context.SaveChangesAsync();
+
+            TempData["Success"] = "تم حذف السجل وتحديث نقاط الطالب بنجاح.";
+            return RedirectToAction("StudentProgress", new { id = studentId });
+        }
+
+        public async Task<IActionResult> Halaqas()
+        {
+            var halaqas = await _context.Halaqas
+                .Include(h => h.Teacher)
+                .Include(h => h.Students)
+                .OrderByDescending(h => h.CreatedAt)
+                .ToListAsync();
+            return View(halaqas);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddHalaqa()
+        {
+            ViewBag.Teachers = await _context.Teachers.ToListAsync();
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddHalaqa(string Name, string Description, string Schedule, int? TeacherId, int TargetPages = 30, string? Level = null, string? Location = null, int MaxCapacity = 20, string? AgeRange = null, string? ClassTime = null)
+        {
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                ModelState.AddModelError("", "اسم الحلقة مطلوب");
+                ViewBag.Teachers = await _context.Teachers.ToListAsync();
+                return View();
+            }
+
+            var halaqa = new Halaqa
+            {
+                Name = Name,
+                Description = Description ?? string.Empty,
+                Schedule = Schedule ?? string.Empty,
+                TeacherId = TeacherId,
+                TargetPages = TargetPages,
+                Level = Level,
+                Location = Location,
+                MaxCapacity = MaxCapacity,
+                AgeRange = AgeRange,
+                ClassTime = ClassTime
+            };
+
+
+            _context.Halaqas.Add(halaqa);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Halaqas");
+        }
+
+        public async Task<IActionResult> Teachers()
+        {
+            var teachers = await _context.Teachers
+                .OrderBy(t => t.SortOrder)
+                .ThenBy(t => t.Name)
+                .ToListAsync();
+            return View(teachers);
+        }
+
+        [HttpGet]
+        public IActionResult AddTeacher()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddTeacher(string Name, string PhoneNumber, string Description, string Role, int SortOrder)
+        {
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                ModelState.AddModelError("", "اسم المعلم مطلوب");
+                return View();
+            }
+
+            var teacher = new Teacher
+            {
+                Name = Name,
+                PhoneNumber = PhoneNumber ?? string.Empty,
+                Description = Description ?? string.Empty,
+                Role = Role,
+                SortOrder = SortOrder
+            };
+
+            _context.Teachers.Add(teacher);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Teachers");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditTeacher(int id)
+        {
+            var teacher = await _context.Teachers.FindAsync(id);
+            if (teacher == null) return NotFound();
+            return View(teacher);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditTeacher(int id, string Name, string PhoneNumber, string Description, string Role, int SortOrder)
+        {
+            var teacher = await _context.Teachers.FindAsync(id);
+            if (teacher == null) return NotFound();
+
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                ModelState.AddModelError("", "اسم المعلم مطلوب");
+                return View(teacher);
+            }
+
+            teacher.Name = Name;
+            teacher.PhoneNumber = PhoneNumber ?? string.Empty;
+            teacher.Description = Description ?? string.Empty;
+            teacher.Role = Role;
+            teacher.SortOrder = SortOrder;
+            teacher.UpdatedAt = DateTime.UtcNow;
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Teachers");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteTeacher(int id)
+        {
+            var teacher = await _context.Teachers.FindAsync(id);
+            if (teacher == null) return NotFound();
+
+            _context.Teachers.Remove(teacher);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Teachers");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditHalaqa(int id)
+        {
+            var halaqa = await _context.Halaqas.FindAsync(id);
+            if (halaqa == null) return NotFound();
+            ViewBag.Teachers = await _context.Teachers.ToListAsync();
+            return View(halaqa);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditHalaqa(int id, string Name, string Description, string Schedule, int? TeacherId, int TargetPages = 30, string? Level = null, string? Location = null, int MaxCapacity = 20, string? AgeRange = null, string? ClassTime = null)
+        {
+            var halaqa = await _context.Halaqas.FindAsync(id);
+            if (halaqa == null) return NotFound();
+
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                ModelState.AddModelError("", "اسم الحلقة مطلوب");
+                ViewBag.Teachers = await _context.Teachers.ToListAsync();
+                return View(halaqa);
+            }
+
+            halaqa.Name = Name;
+            halaqa.Description = Description ?? string.Empty;
+            halaqa.Schedule = Schedule ?? string.Empty;
+            halaqa.TeacherId = TeacherId;
+            halaqa.TargetPages = TargetPages;
+            halaqa.Level = Level;
+            halaqa.Location = Location;
+            halaqa.MaxCapacity = MaxCapacity;
+            halaqa.AgeRange = AgeRange;
+            halaqa.ClassTime = ClassTime;
+            halaqa.UpdatedAt = DateTime.UtcNow;
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Halaqas");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteHalaqa(int id)
+        {
+            var halaqa = await _context.Halaqas
+                .Include(h => h.Students)
+                .FirstOrDefaultAsync(h => h.Id == id);
+
+            if (halaqa == null) return NotFound();
+
+            // Explicitly free all students in this halaqa
+            if (halaqa.Students != null)
+            {
+                foreach (var student in halaqa.Students)
+                {
+                    student.HalaqaId = null;
+                }
+            }
+
+            _context.Halaqas.Remove(halaqa);
+            await _context.SaveChangesAsync();
+
+            TempData["Success"] = "تم حذف الحلقة بنجاح، وتحرير جميع الطلاب المسجلين بها.";
+            return RedirectToAction("Halaqas");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdatePointProgress(int studentId, int newPoints)
+        {
+            var student = await _context.Students.FindAsync(studentId);
+            if (student != null)
+            {
+                student.PointProgress = newPoints;
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "تم تحديث النقاط بنجاح.";
+            }
+            else
+            {
+                TempData["Error"] = "لم يتم العثور على الطالب.";
+            }
+            return RedirectToAction("StudentProgress", new { id = studentId });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateTotalMemorizedPages(int studentId, int newTotalPages)
+        {
+            var student = await _context.Students.FindAsync(studentId);
+            if (student != null)
+            {
+                student.TotalMemorizedPages = newTotalPages;
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "تم تحديث إجمالي الأوجه بنجاح.";
+            }
+            else
+            {
+                TempData["Error"] = "لم يتم العثور على الطالب.";
+            }
+            return RedirectToAction("StudentProgress", new { id = studentId });
+        }
+
+        // ===== REGISTRATION REQUESTS =====
+
+        public async Task<IActionResult> RegistrationRequests(string status = "Pending")
+        {
+            ViewBag.PendingCount = await _context.RegistrationRequests.CountAsync(r => r.Status == RegistrationStatus.Pending);
+            ViewBag.AcceptedCount = await _context.RegistrationRequests.CountAsync(r => r.Status == RegistrationStatus.Accepted);
+            ViewBag.RejectedCount = await _context.RegistrationRequests.CountAsync(r => r.Status == RegistrationStatus.Rejected);
+
+            var query = _context.RegistrationRequests.Include(r => r.PreferredHalaqa).AsQueryable();
+
+            if (status != "All")
+            {
+                if (Enum.TryParse<RegistrationStatus>(status, out var parsedStatus))
+                {
+                    query = query.Where(r => r.Status == parsedStatus);
+                }
+            }
+
+            ViewBag.CurrentStatus = status;
+            ViewBag.Halaqas = await _context.Halaqas.ToListAsync();
+            var requests = await query.OrderByDescending(r => r.CreatedAt).ToListAsync();
+            return View(requests);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AcceptRegistration(int requestId, int halaqaId)
+        {
+            var request = await _context.RegistrationRequests.FindAsync(requestId);
+            if (request == null || request.Status != RegistrationStatus.Pending)
+                return Json(new { success = false, message = "الطلب غير موجود أو تمت معالجته مسبقًا" });
+
+            var halaqa = await _context.Halaqas.FindAsync(halaqaId);
+            if (halaqa == null)
+                return Json(new { success = false, message = "الحلقة غير موجودة" });
+
+            int maxId = await _context.Students.AnyAsync() ? await _context.Students.MaxAsync(s => s.Id) : 0;
+
+            var student = new Student
+            {
+                Name = request.StudentName,
+                SerialNumber = (maxId + 1).ToString(),
+                ParentPhone = request.ParentPhone,
+                Gender = request.Gender,
+                TotalMemorizedPages = 0,
+                PointProgress = 0,
+                ProfileImageUrl = request.ProfileImageUrl,
+                HalaqaId = halaqaId
+            };
+
+            _context.Students.Add(student);
+            await _context.SaveChangesAsync();
+
+            var parent = await _context.Parents.FirstOrDefaultAsync(p => p.PhoneNumber == request.ParentPhone);
+            if (parent == null)
+            {
+                parent = new Parent { PhoneNumber = request.ParentPhone, Name = request.ParentName };
+                _context.Parents.Add(parent);
+                await _context.SaveChangesAsync();
+            }
+
+            bool alreadyLinked = await _context.ParentStudents.AnyAsync(ps => ps.ParentId == parent.Id && ps.StudentId == student.Id);
+            if (!alreadyLinked)
+            {
+                _context.ParentStudents.Add(new ParentStudent { ParentId = parent.Id, StudentId = student.Id });
+            }
+
+            request.Status = RegistrationStatus.Accepted;
+            request.UpdatedAt = DateTime.UtcNow;
+            await _context.SaveChangesAsync();
+
+            TempData["Success"] = "تم قبول الطلب وإضافة الطالب بنجاح";
+            return RedirectToAction("RegistrationRequests");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RejectRegistration(int requestId, string rejectionReason)
+        {
+            var request = await _context.RegistrationRequests.FindAsync(requestId);
+            if (request == null || request.Status != RegistrationStatus.Pending)
+                return Json(new { success = false, message = "الطلب غير موجود أو تمت معالجته مسبقًا" });
+
+            request.Status = RegistrationStatus.Rejected;
+            request.RejectionReason = rejectionReason;
+            request.UpdatedAt = DateTime.UtcNow;
+            await _context.SaveChangesAsync();
+
+            TempData["Success"] = "تم رفض الطلب";
+            return RedirectToAction("RegistrationRequests");
+        }
+    }
+}

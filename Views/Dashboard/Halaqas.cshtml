@@ -1,0 +1,80 @@
+@model IEnumerable<ElMaherQuranSchool.Models.Halaqa>
+@{
+    ViewData["Title"] = "الحلقات";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap:wrap; gap:10px;">
+        <h3 style="margin: 0; color: var(--gold);">قائمة الحلقات القرآنية</h3>
+        <a href="/Dashboard/AddHalaqa" class="btn">➕ إضافة حلقة</a>
+    </div>
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>اسم الحلقة</th>
+                    <th>المستوى</th>
+                    <th>الفرع</th>
+                    <th>المعلم</th>
+                    <th>الطلاب</th>
+                    <th>المواعيد</th>
+                    <th>الإجراءات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var halaqa in Model)
+                {
+                    <tr>
+                        <td style="font-weight:bold; color:var(--gold);">@halaqa.Name</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(halaqa.Level))
+                            {
+                                string lvlIcon = halaqa.Level switch { "مبتدئ" => "🧒", "متوسط" => "📖", "متقدم" => "⭐", "تجويد" => "🎓", _ => "" };
+                                <span style="background:var(--gold-pale); padding:4px 10px; border-radius:50px; font-size:.85rem; font-weight:600;">@lvlIcon @halaqa.Level</span>
+                            }
+                            else
+                            {
+                                <span style="color:var(--text-soft);">—</span>
+                            }
+                        </td>
+                        <td>@(string.IsNullOrEmpty(halaqa.Location) ? "—" : halaqa.Location)</td>
+                        <td>
+                            @if(halaqa.Teacher != null) 
+                            { 
+                                <span style="background:var(--beige-dark); padding:4px 10px; border-radius:50px; font-size:.85rem; font-weight:bold;">@halaqa.Teacher.Name</span> 
+                            } 
+                            else 
+                            { 
+                                <span style="color:var(--text-soft);">بدون معلم</span> 
+                            }
+                        </td>
+                        <td>
+                            <span style="background:var(--gold-pale); padding:4px 12px; border-radius:50px; font-weight:bold; color:var(--gold);">
+                                @(halaqa.Students?.Count ?? 0) / @halaqa.MaxCapacity
+                            </span>
+                        </td>
+                        <td style="font-size: .85rem;">@(string.IsNullOrEmpty(halaqa.Schedule) ? "—" : halaqa.Schedule)</td>
+                        <td>
+                            <div style="display:flex; gap:5px; align-items:center;">
+                                <a href="/Dashboard/EditHalaqa?id=@halaqa.Id" class="btn" style="padding: 4px 10px; font-size: .85rem; background: #e3f2fd; color: black;">✏️ تعديل</a>
+                                <form method="post" action="/Dashboard/DeleteHalaqa" style="display:inline;" onsubmit="return confirmDelete(this, 'هل أنت متأكد من حذف هذه الحلقة؟ سيتم تحرير جميع الطلاب وحذف جميع سجلات الحضور الخاصة بالحلقة.')">
+                                    <input type="hidden" name="id" value="@halaqa.Id" />
+                                    <button type="submit" class="btn" style="padding: 4px 10px; font-size: .85rem; background: #f44336; box-shadow:none;">🗑️ حذف</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        
+        @if(!Model.Any())
+        {
+            <div style="text-align:center; padding: 40px 20px; color:var(--text-soft);">
+                لا يوجد حلقات مسجلة حالياً.
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,201 @@
+@model IEnumerable<ElMaherQuranSchool.Models.RegistrationRequest>
+@{
+    ViewData["Title"] = "طلبات التسجيل";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var halaqas = ViewBag.Halaqas as IEnumerable<ElMaherQuranSchool.Models.Halaqa>;
+    var currentStatus = ViewBag.CurrentStatus as string ?? "Pending";
+}
+
+<div class="card">
+    <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap:wrap; gap:10px;">
+        <h3 style="margin:0; color:var(--gold);">طلبات التسجيل</h3>
+    </div>
+
+    @* Tabs *@
+    <div style="display:flex; gap:8px; margin-bottom:24px; flex-wrap:wrap; border-bottom:2px solid var(--beige-dark); padding-bottom:10px;">
+        <a href="/Dashboard/RegistrationRequests?status=Pending" style="padding:8px 18px; border-radius:50px; font-weight:700; font-size:.85rem; text-decoration:none; @(currentStatus=="Pending"?"background:var(--gold);color:#fff":"background:var(--gold-pale);color:var(--text-soft)")">
+            ⏳ معلقة (@ViewBag.PendingCount)
+        </a>
+        <a href="/Dashboard/RegistrationRequests?status=Accepted" style="padding:8px 18px; border-radius:50px; font-weight:700; font-size:.85rem; text-decoration:none; @(currentStatus=="Accepted"?"background:var(--gold);color:#fff":"background:var(--gold-pale);color:var(--text-soft)")">
+            ✅ مقبولة (@ViewBag.AcceptedCount)
+        </a>
+        <a href="/Dashboard/RegistrationRequests?status=Rejected" style="padding:8px 18px; border-radius:50px; font-weight:700; font-size:.85rem; text-decoration:none; @(currentStatus=="Rejected"?"background:var(--gold);color:#fff":"background:var(--gold-pale);color:var(--text-soft)")">
+            ❌ مرفوضة (@ViewBag.RejectedCount)
+        </a>
+        <a href="/Dashboard/RegistrationRequests?status=All" style="padding:8px 18px; border-radius:50px; font-weight:700; font-size:.85rem; text-decoration:none; @(currentStatus=="All"?"background:var(--gold);color:#fff":"background:var(--gold-pale);color:var(--text-soft)")">
+            📋 الكل
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>الصورة</th>
+                    <th>اسم الطالب</th>
+                    <th>العمر</th>
+                    <th>الجنس</th>
+                    <th>ولي الأمر</th>
+                    <th>الهاتف</th>
+                    <th>الحفظ السابق</th>
+                    <th>الحلقة المفضلة</th>
+                    <th>التاريخ</th>
+                    <th>الحالة</th>
+                    <th>الإجراءات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var req in Model)
+                {
+                    <tr>
+                        <td>
+                            @if (!string.IsNullOrEmpty(req.ProfileImageUrl))
+                            {
+                                <img src="@req.ProfileImageUrl" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" />
+                            }
+                            else
+                            {
+                                <div style="width:40px;height:40px;border-radius:50%;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;font-weight:bold;color:var(--gold);font-size:16px;">
+                                    @req.StudentName.Substring(0,1)
+                                </div>
+                            }
+                        </td>
+                        <td style="font-weight:bold;">@req.StudentName</td>
+                        <td>@(req.Age.HasValue ? req.Age + " سنة" : "—")</td>
+                        <td>@(req.Gender == ElMaherQuranSchool.Models.Gender.Female ? "أنثى" : "ذكر")</td>
+                        <td>@req.ParentName</td>
+                        <td dir="ltr">@req.ParentPhone</td>
+                        <td>@(string.IsNullOrEmpty(req.LastLevelOfMemorization) ? "—" : req.LastLevelOfMemorization)</td>
+                        <td>@(req.PreferredHalaqa?.Name ?? "—")</td>
+                        <td style="font-size:.85rem;">@req.CreatedAt.ToString("yyyy/MM/dd")</td>
+                        <td>
+                            @switch (req.Status)
+                            {
+                                case ElMaherQuranSchool.Models.RegistrationStatus.Pending:
+                                    <span style="background:#fff3cd;color:#856404;padding:4px 10px;border-radius:50px;font-size:.8rem;font-weight:700;">معلق</span>
+                                    break;
+                                case ElMaherQuranSchool.Models.RegistrationStatus.Accepted:
+                                    <span style="background:#d4edda;color:#155724;padding:4px 10px;border-radius:50px;font-size:.8rem;font-weight:700;">مقبول</span>
+                                    break;
+                                case ElMaherQuranSchool.Models.RegistrationStatus.Rejected:
+                                    <span style="background:#f8d7da;color:#721c24;padding:4px 10px;border-radius:50px;font-size:.8rem;font-weight:700;">مرفوض</span>
+                                    break;
+                            }
+                        </td>
+                        <td>
+                            @if (req.Status == ElMaherQuranSchool.Models.RegistrationStatus.Pending)
+                            {
+                                <div style="display:flex;gap:5px;flex-wrap:wrap;">
+                                    <button class="btn" style="padding:6px 12px;font-size:.8rem;background:#28a745;box-shadow:none;" onclick="showAcceptModal(@req.Id,'@req.StudentName')">✅ قبول</button>
+                                    <button class="btn" style="padding:6px 12px;font-size:.8rem;background:#dc3545;box-shadow:none;" onclick="showRejectModal(@req.Id,'@req.StudentName')">❌ رفض</button>
+                                </div>
+                            }
+                            else if (req.Status == ElMaherQuranSchool.Models.RegistrationStatus.Rejected && !string.IsNullOrEmpty(req.RejectionReason))
+                            {
+                                <span style="font-size:.8rem;color:var(--text-soft);cursor:pointer;" title="@req.RejectionReason">💬 سبب الرفض</span>
+                            }
+                            else
+                            {
+                                <span style="color:var(--text-soft);font-size:.85rem;">—</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        @if (!Model.Any())
+        {
+            <div style="text-align:center;padding:40px;color:var(--text-soft);">
+                لا توجد طلبات في هذا القسم.
+            </div>
+        }
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+function showAcceptModal(requestId, studentName) {
+    const halaqaOptions = document.getElementById('halaqaSelect')?.innerHTML || '';
+    Swal.fire({
+        title: 'قبول الطلب',
+        html: `
+            <p style="margin-bottom:16px;font-size:1rem;">قبول: <strong>${studentName}</strong></p>
+            <div style="text-align:right;">
+                <label style="display:block;font-weight:700;margin-bottom:6px;font-size:.9rem;">اختر الحلقة</label>
+                <select id="swalHalaqa" class="swal2-input" style="margin-bottom:12px;">
+                    <option value="">-- اختر حلقة --</option>
+                    @if (halaqas != null)
+                    {
+                        foreach (var h in halaqas)
+                        {
+                            <option value="@h.Id">@h.Name @(!string.IsNullOrEmpty(h.Location) ? "(" + h.Location + ")" : "")</option>
+                        }
+                    }
+                </select>
+            </div>
+        `,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: '✅ قبول',
+        cancelButtonText: 'إلغاء',
+        reverseButtons: true,
+        preConfirm: () => {
+            const halaqaId = document.getElementById('swalHalaqa').value;
+            if (!halaqaId) {
+                Swal.showValidationMessage('يرجى اختيار حلقة');
+                return false;
+            }
+            return { halaqaId: parseInt(halaqaId) };
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/Dashboard/AcceptRegistration';
+            form.innerHTML = `
+                <input type="hidden" name="requestId" value="${requestId}">
+                <input type="hidden" name="halaqaId" value="${result.value.halaqaId}">
+            `;
+            document.body.appendChild(form);
+            form.submit();
+        }
+    });
+}
+
+function showRejectModal(requestId, studentName) {
+    Swal.fire({
+        title: 'رفض الطلب',
+        html: `
+            <p style="margin-bottom:12px;">رفض: <strong>${studentName}</strong></p>
+            <textarea id="swalReason" class="swal2-textarea" placeholder="اكتب سبب الرفض..." style="resize:vertical;min-height:100px;width:100%;padding:10px;border:2px solid #ddd;border-radius:8px;font-family:inherit;"></textarea>
+        `,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: '❌ رفض',
+        cancelButtonText: 'إلغاء',
+        confirmButtonColor: '#dc3545',
+        reverseButtons: true,
+        preConfirm: () => {
+            const reason = document.getElementById('swalReason').value.trim();
+            if (!reason) {
+                Swal.showValidationMessage('يرجى كتابة سبب الرفض');
+                return false;
+            }
+            return { reason };
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/Dashboard/RejectRegistration';
+            form.innerHTML = `
+                <input type="hidden" name="requestId" value="${requestId}">
+                <input type="hidden" name="rejectionReason" value="${result.value.reason}">
+            `;
+            document.body.appendChild(form);
+            form.submit();
+        }
+    });
+}
+</script>

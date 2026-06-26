@@ -1,0 +1,1141 @@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<title>تاج الوقار | حيث يبدأ طريق أهل القرآن</title>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0d5c3a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="/image/app_logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --em:#0d5c3a;--em-d:#093d27;--em-m:#1a7a50;--em-l:#22a06b;--em-g:rgba(13,92,58,.12);
+  --nv:#0b1f3a;--nv-m:#112d54;
+  --gd:#c9a24b;--gd-l:#e2c07a;--gd-p:rgba(201,162,75,.12);
+  --wh:#fff;--ow:#f8f9fb;--sg:#f1f4f8;
+  --tx:#0b1f3a;--tm:#6b7a90;--tl:#9aa5b8;
+  --bd:rgba(201,162,75,.2);
+  --s0:0 2px 12px rgba(11,31,58,.06);--s1:0 8px 32px rgba(11,31,58,.10);--s2:0 20px 60px rgba(11,31,58,.14);
+  --r1:8px;--r2:14px;--r3:22px;--r4:30px;
+  --fd:'Scheherazade New',serif;--fb:'Cairo',sans-serif;
+  --tr:all .3s cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
+body{font-family:var(--fb);color:var(--tx);background:var(--wh);direction:rtl;overflow-x:hidden;line-height:1.7;font-size:15px}
+a{text-decoration:none;color:inherit}
+section{position:relative;overflow:hidden}
+
+.w{width:100%;max-width:1280px;margin:0 auto;padding:0 16px}
+@@media(min-width:640px){.w{padding:0 28px}}
+@@media(min-width:1024px){.w{padding:0 48px}}
+
+.sec{padding:60px 0}
+@@media(min-width:768px){.sec{padding:96px 0}}
+
+.tag{display:inline-flex;align-items:center;gap:7px;background:var(--gd-p);border:1px solid var(--bd);color:var(--gd);font-size:12px;font-weight:600;padding:5px 14px;border-radius:50px;margin-bottom:14px}
+.tag::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gd)}
+.st{font-size:clamp(22px,5vw,40px);font-weight:800;color:var(--nv);line-height:1.25;margin-bottom:12px}
+.ss{font-size:14px;color:var(--tm);line-height:1.85;max-width:560px}
+.tc .ss{margin:0 auto}
+.tc{text-align:center}
+
+.bg{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--em-m),var(--em-d));color:#fff!important;border:none;border-radius:50px;padding:12px 24px;font-size:13px;font-weight:700;font-family:var(--fb);cursor:pointer;transition:var(--tr);box-shadow:0 4px 16px rgba(13,92,58,.28);white-space:nowrap;text-decoration:none}
+.bg:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(13,92,58,.38)}
+.bg:active{transform:translateY(0)}
+.bg-l{padding:14px 30px;font-size:15px}
+.bo{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:transparent;color:rgba(255,255,255,.85)!important;border:1.5px solid rgba(255,255,255,.25);border-radius:50px;padding:11px 24px;font-size:13px;font-weight:600;font-family:var(--fb);cursor:pointer;transition:var(--tr);white-space:nowrap;text-decoration:none}
+.bo:hover{border-color:var(--gd);color:var(--gd-l)!important}
+
+.pe{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%230d5c3a'%3E%3Cpath d='M40 0L50 20L40 15L30 20Z'/%3E%3Cpath d='M40 80L50 60L40 65L30 60Z'/%3E%3Cpath d='M0 40L20 30L15 40L20 50Z'/%3E%3Cpath d='M80 40L60 30L65 40L60 50Z'/%3E%3C/g%3E%3Ccircle cx='40' cy='40' r='14' fill='none' stroke='%230d5c3a' stroke-width='.8'/%3E%3C/svg%3E");background-size:80px}
+.pg{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23c9a24b' stroke-width='.7'%3E%3Cpolygon points='30,4 56,19 56,49 30,57 4,49 4,19'/%3E%3Cpolygon points='30,14 46,23 46,43 30,49 14,43 14,23'/%3E%3C/g%3E%3C/svg%3E");background-size:60px}
+
+/* NAV */
+#nav{position:fixed;inset:0 0 auto;z-index:9999;transition:var(--tr)}
+#nav.sc{background:rgba(255,255,255,.96);backdrop-filter:blur(18px);box-shadow:var(--s1)}
+.nw{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;gap:10px}
+@@media(min-width:640px){.nw{padding:14px 28px}}
+@@media(min-width:1024px){.nw{padding:15px 48px}}
+.nl{display:flex;align-items:center;gap:9px;flex-shrink:0}
+.ni{width:36px;height:36px;border-radius:9px;flex-shrink:0;background:linear-gradient(135deg,var(--em),var(--gd));display:flex;align-items:center;justify-content:center;font-size:17px;box-shadow:0 3px 10px rgba(13,92,58,.3)}
+.nn{font-family:var(--fd);font-size:18px;font-weight:700;color:#fff;transition:var(--tr)}
+.nb{font-size:9px;color:var(--gd-l);transition:var(--tr)}
+#nav.sc .nn{color:var(--nv)}
+#nav.sc .nb{color:var(--gd)}
+.nlks{display:none;list-style:none;gap:2px;align-items:center}
+@@media(min-width:1050px){.nlks{display:flex}}
+.nlks a{font-size:12px;font-weight:500;color:rgba(255,255,255,.82);padding:6px 10px;border-radius:7px;transition:var(--tr)}
+#nav.sc .nlks a{color:var(--tx)}
+.nlks a:hover{background:var(--gd-p);color:var(--gd)!important}
+.nr{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.nc{display:none}
+@@media(min-width:520px){.nc{display:flex}}
+.nc .bg{padding:8px 16px;font-size:12px;background:linear-gradient(135deg,var(--gd),#a87b2e);box-shadow:0 3px 12px rgba(201,162,75,.3)}
+.nh{background:none;border:none;cursor:pointer;width:36px;height:36px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border-radius:8px}
+@@media(min-width:1050px){.nh{display:none}}
+.nh span{width:21px;height:2px;background:#fff;border-radius:2px;transition:var(--tr);display:block}
+#nav.sc .nh span{background:var(--nv)}
+.nh.op span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nh.op span:nth-child(2){opacity:0}
+.nh.op span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* MOBILE MENU */
+#mob{position:fixed;inset:0 0% 0 auto;right:0;width:85%;max-width:320px;z-index:9998;background:var(--nv);padding:76px 22px 32px;transform:translateX(110%);transition:transform .35s ease;display:flex;flex-direction:column;gap:4px;box-shadow:-4px 0 30px rgba(0,0,0,.35);overflow-y:auto}
+#mob.op{transform:translateX(0)}
+#mob a{color:rgba(255,255,255,.78);font-size:14px;font-weight:500;padding:11px 14px;border-radius:9px;transition:var(--tr);border-right:3px solid transparent}
+#mob a:hover{background:rgba(255,255,255,.06);border-right-color:var(--gd);color:var(--gd-l)}
+.mcta{margin-top:14px}
+.mcta .bg{width:100%;padding:13px;font-size:14px}
+#ovl{position:fixed;inset:0;z-index:9997;background:rgba(0,0,0,.5);display:none;backdrop-filter:blur(2px)}
+#ovl.sh{display:block}
+
+/* HERO */
+#hero{min-height:100svh;background:linear-gradient(155deg,var(--nv) 0%,var(--em-d) 55%,var(--nv-m) 100%);display:flex;align-items:center;padding:106px 0 72px}
+.orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(80px);z-index:0}
+.o1{width:500px;height:500px;top:-180px;left:-180px;background:radial-gradient(circle,rgba(13,92,58,.4) 0%,transparent 70%)}
+.o2{width:350px;height:350px;bottom:-80px;right:5%;background:radial-gradient(circle,rgba(201,162,75,.12) 0%,transparent 70%)}
+.hi{position:relative;z-index:2}
+.hbg{display:inline-flex;align-items:center;gap:8px;background:rgba(201,162,75,.14);border:1px solid rgba(201,162,75,.3);color:var(--gd-l);font-size:11px;font-weight:500;padding:5px 15px;border-radius:50px;margin-bottom:18px}
+.bd{width:6px;height:6px;border-radius:50%;background:var(--gd-l);animation:pulse 2s infinite}
+@@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.ht{font-family:var(--fd);font-size:clamp(48px,13vw,96px);font-weight:700;color:#fff;line-height:1.05;margin-bottom:10px}
+.gt{background:linear-gradient(135deg,var(--gd-l),var(--gd));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.htag{font-size:clamp(13px,3vw,19px);color:rgba(255,255,255,.62);font-style:italic;margin-bottom:16px;font-family:var(--fd)}
+.hdesc{font-size:13px;line-height:1.9;color:rgba(255,255,255,.6);max-width:460px;margin-bottom:26px}
+
+/* HERO PORTAL CTA BANNER */
+.hpcta{background:rgba(201,162,75,.14);border:1px solid rgba(201,162,75,.3);border-radius:var(--r3);padding:16px 18px;margin-bottom:26px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.hpcta .ico{font-size:26px;flex-shrink:0}
+.hpcta .txt{flex:1;min-width:150px}
+.hpcta .txt strong{display:block;font-size:14px;color:#fff;font-weight:700;margin-bottom:1px}
+.hpcta .txt span{font-size:11px;color:rgba(255,255,255,.52)}
+.hpcta .bg{padding:9px 18px;font-size:12px;flex-shrink:0;background:linear-gradient(135deg,var(--gd),#a87b2e);box-shadow:0 3px 12px rgba(201,162,75,.3)}
+
+.hbtns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px}
+.hbtns .bg-l{font-size:14px}
+.hbtns .bo{font-size:14px}
+
+.hss{display:flex;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.1);padding-top:26px;gap:0}
+.hs{flex:1;min-width:70px;padding:0 12px 0 0;border-left:1px solid rgba(255,255,255,.08)}
+.hs:first-child{padding-right:0}
+.hs:last-child{border-left:none;padding-left:12px}
+.hv{font-size:26px;font-weight:900;color:#fff;line-height:1}
+.hv span{color:var(--gd-l)}
+.hl{font-size:10px;color:rgba(255,255,255,.4);margin-top:3px}
+
+.sci{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;color:rgba(255,255,255,.3);font-size:9px;z-index:2}
+.sw{width:19px;height:30px;border:1.5px solid rgba(255,255,255,.18);border-radius:10px;display:flex;justify-content:center;padding-top:5px}
+.sd{width:3px;height:5px;background:rgba(255,255,255,.38);border-radius:2px;animation:sda 2s infinite}
+@@keyframes sda{0%{transform:translateY(0);opacity:1}100%{transform:translateY(10px);opacity:0}}
+
+/* STICKY PORTAL STRIP */
+#pstrip{background:linear-gradient(135deg,var(--em),var(--nv));padding:0;position:sticky;top:62px;z-index:998;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.psi{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;gap:10px;flex-wrap:wrap}
+@@media(min-width:640px){.psi{padding:11px 28px}}
+.pst{display:flex;align-items:center;gap:9px}
+.pst .ico{font-size:20px}
+.pst .lbl{font-size:12px;font-weight:700;color:#fff}
+.pst .sub{font-size:10px;color:rgba(255,255,255,.5);display:none}
+@@media(min-width:420px){.pst .sub{display:block}}
+.pstrip-btn .bg{padding:8px 16px;font-size:12px;background:linear-gradient(135deg,var(--gd),#a87b2e);box-shadow:0 3px 10px rgba(201,162,75,.3)}
+
+/* ABOUT */
+#about{background:var(--wh)}
+.ag{display:grid;grid-template-columns:1fr;gap:32px;align-items:center}
+@@media(min-width:900px){.ag{grid-template-columns:1fr 1fr}}
+.aimg{height:320px;border-radius:var(--r3);background:linear-gradient(145deg,var(--em-d),var(--nv));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;font-size:60px;color:rgba(255,255,255,.25);position:relative;overflow:hidden}
+@@media(min-width:768px){.aimg{height:400px}}
+.aimg em{font-size:13px;font-family:var(--fd);color:rgba(255,255,255,.28);font-style:normal}
+.abadge{position:absolute;bottom:16px;right:16px;left:16px;background:rgba(255,255,255,.97);border-radius:var(--r2);padding:13px 16px;display:flex;align-items:center;gap:11px;box-shadow:var(--s1)}
+.abv{font-size:16px;font-weight:800;color:var(--nv)}
+.abl{font-size:11px;color:var(--tm)}
+.afs{display:flex;flex-direction:column;gap:11px;margin-top:22px}
+.af{display:flex;align-items:flex-start;gap:11px;padding:13px;border-radius:var(--r2);border:1px solid var(--sg);transition:var(--tr)}
+.af:hover{border-color:var(--bd);box-shadow:var(--s0)}
+.afic{width:40px;height:40px;border-radius:10px;flex-shrink:0;background:var(--gd-p);color:var(--gd);display:flex;align-items:center;justify-content:center;font-size:18px}
+.aft{font-size:13px;font-weight:700;color:var(--nv);margin-bottom:3px}
+.afd{font-size:12px;color:var(--tm);line-height:1.7}
+
+/* SERVICES */
+#srv{background:var(--ow)}
+.sg2{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;margin-top:36px}
+@@media(min-width:580px){.sg2{grid-template-columns:repeat(3,1fr);gap:14px}}
+@@media(min-width:1024px){.sg2{grid-template-columns:repeat(4,1fr)}}
+.sc{background:var(--wh);border-radius:var(--r3);padding:20px 16px;border:1px solid transparent;box-shadow:var(--s0);transition:var(--tr);position:relative;overflow:hidden}
+.sc::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--em-d),var(--em-m));opacity:0;transition:var(--tr);z-index:0}
+.sc:hover{transform:translateY(-4px);box-shadow:var(--s2)}
+.sc:hover::before{opacity:1}
+.sc:hover .sci2{background:rgba(255,255,255,.14);color:var(--gd-l)}
+.sc:hover .sct{color:#fff}
+.sc:hover .scd{color:rgba(255,255,255,.62)}
+.sci2{width:44px;height:44px;border-radius:10px;background:var(--gd-p);color:var(--gd);display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:13px;position:relative;z-index:1;transition:var(--tr)}
+.sct{font-size:12px;font-weight:700;color:var(--nv);margin-bottom:6px;position:relative;z-index:1;transition:var(--tr)}
+.scd{font-size:11px;color:var(--tm);line-height:1.7;position:relative;z-index:1;transition:var(--tr)}
+
+/* HALAQAS */
+#hal{background:var(--wh)}
+.hg{display:grid;grid-template-columns:1fr;gap:14px;margin-top:36px}
+@@media(min-width:580px){.hg{grid-template-columns:repeat(2,1fr)}}
+@@media(min-width:900px){.hg{grid-template-columns:repeat(3,1fr)}}
+
+.hc{background:var(--wh);border-radius:var(--r3);overflow:hidden;box-shadow:var(--s1);border:1px solid var(--sg);transition:var(--tr)}
+.hc:hover{transform:translateY(-3px);box-shadow:var(--s2)}
+.hch{padding:18px 16px 13px;border-bottom:1px solid var(--sg)}
+.hlv{display:inline-flex;align-items:center;gap:5px;font-size:9px;font-weight:700;padding:3px 9px;border-radius:50px;margin-bottom:8px}
+.lv0{background:rgba(236,72,153,.1);color:#ec4899}
+.lv1{background:rgba(245,158,11,.1);color:#d97706}
+.lv2{background:rgba(34,160,107,.12);color:var(--em-l)}
+.lv3{background:rgba(99,102,241,.1);color:#6366f1}
+.hn{font-size:15px;font-weight:800;color:var(--nv);margin-bottom:4px}
+.htr{font-size:11px;color:var(--tm);display:flex;align-items:center;gap:4px}
+.hb{padding:14px 16px}
+.hi2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.hil{font-size:9px;color:var(--tl);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:1px}
+.hiv{font-size:12px;font-weight:700;color:var(--nv)}
+.cpl{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+.cpt{font-size:11px;font-weight:600;color:var(--nv)}
+.cpc{font-size:11px;color:var(--tm)}
+.cpb{height:7px;background:var(--sg);border-radius:4px;overflow:hidden}
+.cpf{height:100%;border-radius:4px;transition:width .8s ease}
+.cf-g{background:linear-gradient(to left,var(--em-l),var(--em-m))}
+.cf-y{background:linear-gradient(to left,#f59e0b,#d97706)}
+.cf-r{background:linear-gradient(to left,#ef4444,#dc2626)}
+.cps{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;margin-top:7px;padding:3px 9px;border-radius:50px}
+.st-o{background:rgba(34,160,107,.1);color:var(--em-l)}
+.st-f{background:rgba(245,158,11,.1);color:#d97706}
+.st-x{background:rgba(239,68,68,.1);color:#ef4444}
+.hfoot{padding:12px 16px;border-top:1px solid var(--sg);display:flex;align-items:center;justify-content:space-between;gap:8px}
+.hfoot .bg{padding:8px 16px;font-size:11px}
+.hfoot .bg:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
+.hstu{display:flex;align-items:center}
+.hav{width:24px;height:24px;border-radius:50%;border:2px solid var(--wh);background:linear-gradient(135deg,var(--em),var(--gd));display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;margin-left:-5px}
+.hav:first-child{margin-left:0}
+.hav-m{background:var(--sg);color:var(--tm);font-size:8px}
+
+/* LOCATIONS */
+#loc{background:var(--ow)}
+.lg{display:grid;grid-template-columns:1fr;gap:14px;margin-top:36px}
+@@media(min-width:640px){.lg{grid-template-columns:repeat(2,1fr)}}
+.lc{border-radius:var(--r3);overflow:hidden;box-shadow:var(--s1);transition:var(--tr);border:1px solid var(--sg)}
+.lc:hover{transform:translateY(-3px);box-shadow:var(--s2)}
+.lm{height:150px;background:linear-gradient(135deg,var(--nv),var(--nv-m));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.lm::before{content:'';position:absolute;inset:0;opacity:.06;background-image:linear-gradient(rgba(201,162,75,1) 1px,transparent 1px),linear-gradient(90deg,rgba(201,162,75,1) 1px,transparent 1px);background-size:24px 24px}
+.lpin{font-size:34px;animation:pb 2s ease-in-out infinite}
+@@keyframes pb{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.li{padding:18px 16px}
+.lb{display:inline-flex;align-items:center;gap:4px;background:var(--em-g);color:var(--em-m);font-size:10px;font-weight:600;padding:3px 9px;border-radius:50px;margin-bottom:7px}
+.ln{font-size:17px;font-weight:800;color:var(--nv);margin-bottom:8px}
+.ld{font-size:12px;color:var(--tm);line-height:1.9}
+.llk{display:inline-flex;align-items:center;gap:5px;margin-top:11px;color:var(--em-m);font-size:12px;font-weight:700;transition:var(--tr)}
+.llk:hover{color:var(--gd);gap:9px}
+
+/* PORTAL */
+#portal{background:linear-gradient(155deg,var(--nv),var(--em-d))}
+#portal .st{color:#fff}
+#portal .ss{color:rgba(255,255,255,.56)}
+#portal .tag{background:rgba(201,162,75,.14);border-color:rgba(201,162,75,.3)}
+.pbox{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(16px);border-radius:var(--r4);padding:22px 16px;box-shadow:0 24px 60px rgba(0,0,0,.25)}
+@@media(min-width:640px){.pbox{padding:34px 30px}}
+.ph h4{font-size:16px;font-weight:700;color:#fff;margin-bottom:3px}
+.ph p{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:18px}
+.pr{display:flex;gap:9px;flex-wrap:wrap}
+.pi{flex:1;min-width:170px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);border-radius:10px;padding:12px 15px;color:#fff;font-family:var(--fb);font-size:14px;outline:none;transition:var(--tr)}
+.pi::placeholder{color:rgba(255,255,255,.28)}
+.pi:focus{border-color:var(--gd);background:rgba(255,255,255,.1)}
+
+.sw2{display:none;flex-direction:column;gap:11px;margin-top:18px}
+.sw2.sh{display:flex}
+.stuc{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r2);overflow:hidden}
+.stuh{display:flex;align-items:center;gap:11px;padding:14px 14px 11px;cursor:pointer}
+.stuh:hover{background:rgba(255,255,255,.04)}
+.stua{width:42px;height:42px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#fff}
+.stua-img{width:42px;height:42px;border-radius:50%;flex-shrink:0;object-fit:cover;border:2px solid rgba(255,255,255,.2)}
+.stun{font-size:13px;font-weight:700;color:#fff}
+.stulv{font-size:10px;color:rgba(255,255,255,.4);margin-top:1px}
+.stubg{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px}
+.sbg{font-size:9px;font-weight:600;padding:2px 7px;border-radius:50px}
+.bgr{background:rgba(34,160,107,.18);color:#5cd9a0}
+.bgg{background:rgba(201,162,75,.18);color:var(--gd-l)}
+.exb{width:28px;height:28px;border-radius:7px;flex-shrink:0;margin-right:auto;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);color:rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;transition:var(--tr)}
+.exb:hover{background:var(--gd);color:var(--nv)}
+.exb i{transition:transform .3s ease}
+.stuc.exp .exb i{transform:rotate(180deg)}
+
+.stust{display:flex;border-top:1px solid rgba(255,255,255,.07)}
+.ss2{flex:1;padding:9px 5px;text-align:center;border-left:1px solid rgba(255,255,255,.07)}
+.ss2:last-child{border-left:none}
+.ssv{font-size:15px;font-weight:800;color:var(--gd-l);display:block}
+.ssl{font-size:9px;color:rgba(255,255,255,.33)}
+
+.chw{max-height:0;overflow:hidden;transition:max-height .45s ease}
+.chw.op{max-height:500px}
+.chi{padding:0 14px 16px}
+.ctabs{display:flex;gap:5px;margin-bottom:10px;flex-wrap:wrap}
+.ctab{font-size:10px;font-weight:600;padding:5px 11px;border-radius:50px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.1);cursor:pointer;transition:var(--tr)}
+.ctab.on{background:var(--gd);color:var(--nv);border-color:var(--gd)}
+.ccw{position:relative;height:170px}
+@@media(min-width:480px){.ccw{height:210px}}
+
+
+/* TEACHERS */
+#teachers{background:var(--wh)}
+.tg{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:40px}
+@@media(min-width:580px){.tg{grid-template-columns:repeat(3,1fr);gap:20px}}
+@@media(min-width:1024px){.tg{grid-template-columns:repeat(4,1fr)}}
+.teachcard{background:var(--wh);border-radius:var(--r3);overflow:hidden;box-shadow:var(--s1);border:1px solid var(--sg);transition:var(--tr);text-align:center}
+.teachcard:hover{transform:translateY(-5px);box-shadow:var(--s2);border-color:var(--bd)}
+.teach-img{height:160px;background:linear-gradient(145deg,var(--em-d),var(--nv));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+@@media(min-width:580px){.teach-img{height:180px}}
+.teach-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--em-m),var(--gd));display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:800;color:#fff;border:3px solid rgba(255,255,255,.2);position:relative;z-index:1}
+.teach-img-pat{position:absolute;inset:0;opacity:.08;background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='14' fill='none' stroke='%23c9a24b' stroke-width='.6'/%3E%3C/svg%3E");background-size:40px}
+.teach-body{padding:16px 14px 18px}
+.teach-name{font-size:14px;font-weight:800;color:var(--nv);margin-bottom:4px}
+.teach-spec{display:inline-flex;align-items:center;gap:5px;background:var(--gd-p);border:1px solid var(--bd);color:var(--gd);font-size:10px;font-weight:600;padding:3px 10px;border-radius:50px;margin-bottom:10px}
+.teach-desc{font-size:11px;color:var(--tm);line-height:1.75}
+.teach-stats{display:flex;justify-content:center;gap:0;border-top:1px solid var(--sg);margin-top:14px;padding-top:12px}
+.teach-stat{flex:1;text-align:center;border-left:1px solid var(--sg)}
+.teach-stat:last-child{border-left:none}
+.ts-val{font-size:14px;font-weight:800;color:var(--em);display:block}
+.ts-lbl{font-size:9px;color:var(--tl)}
+
+/* ACHIEVEMENTS */
+#ach{background:var(--ow)}
+.gg{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:36px}
+@@media(min-width:580px){.gg{grid-template-columns:repeat(3,1fr);gap:12px}}
+@@media(min-width:1024px){
+  .gg{grid-template-columns:repeat(12,1fr)}
+  .gi:nth-child(1){grid-column:span 5;grid-row:span 2}
+  .gi:nth-child(2){grid-column:span 7}
+  .gi:nth-child(3){grid-column:span 4}
+  .gi:nth-child(4){grid-column:span 3}
+  .gi:nth-child(5){grid-column:span 4}
+  .gi:nth-child(6){grid-column:span 8}
+  .gi:nth-child(7){grid-column:span 4}
+}
+.gi{border-radius:var(--r2);overflow:hidden;position:relative;cursor:pointer;box-shadow:var(--s0)}
+.gi:hover .giov{opacity:1}
+.giph{background:linear-gradient(145deg,var(--em-d),var(--nv));display:flex;align-items:center;justify-content:center;min-height:110px;height:100%;font-size:30px;color:rgba(255,255,255,.18)}
+@@media(min-width:1024px){.gi:nth-child(1) .giph{min-height:360px}}
+.giov{position:absolute;inset:0;background:rgba(13,92,58,.82);opacity:0;transition:var(--tr);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px}
+.giov i{font-size:20px;color:#fff}
+.giov span{font-size:10px;color:rgba(255,255,255,.8)}
+
+/* STEPS */
+#join{background:var(--wh)}
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:44px}
+@@media(min-width:768px){.steps{grid-template-columns:repeat(4,1fr)}}
+.step{text-align:center}
+.stn{width:58px;height:58px;border-radius:50%;margin:0 auto 14px;background:var(--wh);border:2.5px solid var(--em);display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:800;color:var(--em);box-shadow:var(--s0),0 0 0 5px var(--wh);transition:var(--tr)}
+.step:hover .stn{background:var(--em);color:#fff;transform:scale(1.07)}
+.stt{font-size:13px;font-weight:700;color:var(--nv);margin-bottom:4px}
+.std{font-size:11px;color:var(--tm);line-height:1.7}
+
+/* TESTIMONIALS */
+#tst{background:var(--ow)}
+.tcar{overflow:hidden;margin-top:36px}
+.ttr{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.tcard{min-width:100%;padding:0 4px}
+.tcin{background:var(--wh);border-radius:var(--r3);padding:24px 20px;box-shadow:var(--s1);border:1px solid var(--sg);max-width:680px;margin:0 auto}
+@@media(min-width:640px){.tcin{padding:38px}}
+.tcq{font-size:48px;color:var(--gd-p);line-height:.7;margin-bottom:8px;display:block;font-family:Georgia,serif}
+.tctx{font-size:13px;line-height:1.9;color:var(--tx);font-style:italic;margin-bottom:18px}
+.tcau{display:flex;align-items:center;gap:10px}
+.tcav{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;font-weight:700;flex-shrink:0}
+.tcn{font-size:12px;font-weight:700;color:var(--nv)}
+.tcr{font-size:10px;color:var(--tm)}
+.tcs{color:var(--gd);font-size:10px;margin-top:1px}
+.tcc{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:18px}
+.ta{width:36px;height:36px;border-radius:50%;background:var(--wh);border:1px solid var(--sg);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--tr);color:var(--nv);font-size:13px;box-shadow:var(--s0)}
+.ta:hover{background:var(--em);color:#fff;border-color:var(--em)}
+.tds{display:flex;gap:6px}
+.td{width:6px;height:6px;border-radius:3px;background:var(--tl);border:none;cursor:pointer;transition:var(--tr);padding:0}
+.td.on{width:22px;background:var(--em)}
+
+/* FAQ */
+#faq{background:var(--wh)}
+.fg2{display:grid;grid-template-columns:1fr;gap:28px}
+@@media(min-width:900px){.fg2{grid-template-columns:1fr 2fr}}
+.fl{list-style:none;display:flex;flex-direction:column;gap:8px}
+@@media(min-width:900px){.fl{margin-top:0}}
+.fi{border:1px solid var(--sg);border-radius:var(--r2);overflow:hidden;transition:var(--tr)}
+.fi.op{border-color:var(--bd);box-shadow:var(--s0)}
+.fq{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;cursor:pointer;font-size:12px;font-weight:600;color:var(--nv);gap:8px;transition:var(--tr)}
+.fq:hover{background:var(--ow)}
+.fi.op .fq{background:var(--em-g);color:var(--em)}
+.fic{width:26px;height:26px;border-radius:7px;flex-shrink:0;background:var(--sg);color:var(--tm);display:flex;align-items:center;justify-content:center;font-size:11px;transition:var(--tr)}
+.fi.op .fic{background:var(--em);color:#fff;transform:rotate(45deg)}
+.fa{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s ease;padding:0 18px;font-size:12px;color:var(--tm);line-height:1.9}
+.fi.op .fa{max-height:200px;padding:0 18px 16px}
+
+/* REGISTER */
+#reg{background:var(--ow)}
+.fc{background:var(--wh);border-radius:var(--r4);padding:22px 16px;box-shadow:var(--s2);border:1px solid var(--sg);position:relative;overflow:hidden}
+@@media(min-width:580px){.fc{padding:36px 32px}}
+.fc::before{content:'';position:absolute;top:0;right:0;left:0;height:4px;background:linear-gradient(to left,var(--gd),var(--em-m))}
+.fg3{display:grid;grid-template-columns:1fr;gap:12px}
+@@media(min-width:580px){.fg3{grid-template-columns:1fr 1fr}}
+.fgrp{display:flex;flex-direction:column;gap:5px}
+.fgrp.full{grid-column:1/-1}
+.flb{font-size:11px;font-weight:600;color:var(--nv)}
+.fin{background:var(--ow);border:1.5px solid transparent;border-radius:10px;padding:11px 13px;font-family:var(--fb);font-size:13px;color:var(--tx);outline:none;transition:var(--tr);width:100%}
+.fin:focus{background:#fff;border-color:var(--em);box-shadow:0 0 0 3px var(--em-g)}
+.fin::placeholder{color:var(--tl)}
+select.fin{appearance:none;cursor:pointer}
+.fsb{text-align:center;margin-top:6px}
+.fsb .bg{width:100%;padding:14px;font-size:14px}
+.fnt{font-size:10px;color:var(--tl);margin-top:9px;text-align:center}
+.ferr{font-size:10px;color:#e53935;min-height:14px;transition:.2s}
+
+/* FOOTER */
+#footer{background:var(--nv);padding:52px 0 0}
+.ft{display:grid;grid-template-columns:1fr;gap:28px;padding-bottom:44px}
+@@media(min-width:580px){.ft{grid-template-columns:1fr 1fr}}
+@@media(min-width:1024px){.ft{grid-template-columns:2fr 1fr 1fr 1fr}}
+.fd{font-size:12px;color:rgba(255,255,255,.38);line-height:1.9;margin-top:11px}
+.fct{font-size:11px;font-weight:700;color:var(--gd-l);margin-bottom:13px}
+.flks{list-style:none;display:flex;flex-direction:column;gap:7px}
+.flks a{font-size:12px;color:rgba(255,255,255,.43);transition:var(--tr)}
+.flks a:hover{color:var(--gd-l);padding-right:5px}
+.socs{display:flex;gap:8px;margin-top:16px}
+.soc{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-size:13px;transition:var(--tr)}
+.soc:hover{background:var(--gd);border-color:var(--gd);color:#fff}
+.fb{border-top:1px solid rgba(255,255,255,.07);padding:18px 0;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+@@media(min-width:640px){.fb{flex-direction:row;justify-content:space-between}}
+.fsl{font-family:var(--fd);font-size:12px;color:rgba(255,255,255,.26);font-style:italic}
+.fcp{font-size:11px;color:rgba(255,255,255,.2)}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:translateY(0)}
+.rv1{transition-delay:.1s}
+.rv2{transition-delay:.2s}
+.rv3{transition-delay:.3s}
+
+/* TOAST */
+#toast{position:fixed;bottom:18px;right:14px;z-index:99999;background:var(--em);color:#fff;padding:11px 16px;border-radius:11px;box-shadow:0 8px 28px rgba(0,0,0,.2);font-size:12px;font-weight:600;display:none;align-items:center;gap:7px;opacity:0;transform:translateY(14px);transition:all .3s ease;max-width:calc(100vw - 28px)}
+
+@@media(max-width:380px){
+  .hbtns{flex-direction:column}
+  .hbtns .bg-l,.hbtns .bo{width:100%;text-align:center}
+  .hpcta .bg{width:100%}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nw">
+    <div class="nl">
+      <div class="ni">📖</div>
+      <div>
+        <div class="nn">تاج الوقار</div>
+        <div class="nb">منصة تحفيظ القرآن</div>
+      </div>
+    </div>
+    <ul class="nlks">
+      <li><a href="#hero">الرئيسية</a></li>
+      <li><a href="#about">عن المنصة</a></li>
+      <li><a href="#hal">الحلقات</a></li>
+      <li><a href="#teachers">المشايخ</a></li>
+      <li><a href="#portal">متابعة الأبناء</a></li>
+      <li><a href="#ach">الإنجازات</a></li>
+      <li><a href="#reg">التسجيل</a></li>
+    </ul>
+    <div class="nr">
+      <a href="#portal" class="bg nc"><i class="bi bi-people-fill"></i> تابع أبناءك</a>
+      <button class="nh" id="nh"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mob">
+  <a href="#hero" onclick="cm()">🏠 الرئيسية</a>
+  <a href="#about" onclick="cm()">📘 عن المنصة</a>
+  <a href="#srv" onclick="cm()">⭐ الخدمات</a>
+  <a href="#hal" onclick="cm()">📚 الحلقات المتاحة</a>
+  <a href="#loc" onclick="cm()">📍 أماكن الحلقات</a>
+  <a href="#teachers" onclick="cm()">👨‍🏫 مشايخنا وأساتذتنا</a>
+  <a href="#portal" onclick="cm()">👨‍👧 متابعة الأبناء</a>
+  <a href="#ach" onclick="cm()">🏆 الإنجازات</a>
+  <a href="#faq" onclick="cm()">❓ أسئلة شائعة</a>
+  <div class="mcta">
+    <a href="#portal" class="bg" onclick="cm()"><i class="bi bi-people-fill"></i> تابع أبناءك الآن</a>
+  </div>
+  <div class="mcta" style="margin-top:8px">
+    <a href="#reg" class="bg" style="background:linear-gradient(135deg,#c9a24b,#a87b2e)" onclick="cm()"><i class="bi bi-journal-bookmark-fill"></i> سجل الآن</a>
+  </div>
+</div>
+<div id="ovl" onclick="cm()"></div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="pe"></div>
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="w">
+    <div class="hi">
+      <div class="hbg"><span class="bd"></span>منصة متخصصة في تحفيظ القرآن الكريم</div>
+      <h1 class="ht"><span class="gt">تاج الوقار</span></h1>
+      <p class="htag">حيث يبدأ طريق أهل القرآن</p>
+      <p class="hdesc">منصة متخصصة في تحفيظ القرآن الكريم وتعليم التجويد وتصحيح التلاوة ومتابعة الطلاب وفق منهج تربوي متكامل.</p>
+
+      <!-- ★ PRIMARY CTA - PARENT PORTAL -->
+      <div class="hpcta">
+        <div class="ico">👨‍👧‍👦</div>
+        <div class="txt">
+          <strong>تابع مسيرة ابنك الآن</strong>
+          <span>تقارير يومية · مستوى الحفظ · تقييمات المعلم</span>
+        </div>
+        <a href="#portal" class="bg"><i class="bi bi-arrow-left"></i> متابعة الأبناء</a>
+      </div>
+
+      <div class="hbtns">
+        <a href="#reg" class="bg bg-l"><i class="bi bi-journal-bookmark-fill"></i> سجل الآن</a>
+        <a href="#hal" class="bo"><i class="bi bi-search"></i> تصفح الحلقات</a>
+      </div>
+      <div class="hss">
+        <div class="hs"><div class="hv">@ViewBag.TotalStudents<span>+</span></div><div class="hl">طالب مُسجَّل</div></div>
+        <div class="hs"><div class="hv">@ViewBag.TotalTeachers<span>+</span></div><div class="hl">معلم متخصص</div></div>
+        <div class="hs"><div class="hv">@ViewBag.TotalMemorizers<span>+</span></div><div class="hl">خريج حافظ</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="sci"><div class="sw"><div class="sd"></div></div><span>تمرير للأسفل</span></div>
+</section>
+
+<!-- STICKY STRIP -->
+<div id="pstrip">
+  <div class="psi w">
+    <div class="pst">
+      <div class="ico">📊</div>
+      <div>
+        <div class="lbl">بوابة ولي الأمر</div>
+        <div class="sub">تابع أبناءك يوميًا بسهولة تامة</div>
+      </div>
+    </div>
+    <div class="pstrip-btn"><a href="#portal" class="bg"><i class="bi bi-people-fill"></i> تابع أبناءك</a></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="sec">
+  <div class="pe" style="opacity:.018"></div>
+  <div class="w">
+    <div class="ag">
+      <div class="rv">
+        <div class="aimg">
+          <div class="pg" style="opacity:.3"></div>
+          📖
+          <em>منصة تاج الوقار</em>
+          <div class="abadge">
+            <div style="font-size:26px">🏆</div>
+            <div><div class="abv">٥+ سنوات</div><div class="abl">من التميز في تحفيظ القرآن الكريم</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="rv rv1">
+        <div class="tag">عن المنصة</div>
+        <h2 class="st">منصة تاج الوقار<br>لتحفيظ القرآن الكريم</h2>
+        <p class="ss">أُسِّست منصة تاج الوقار بهدف إيجاد بيئة تعليمية راقية تجمع بين الأصالة الإسلامية والأسلوب التربوي الحديث.</p>
+        <div class="afs">
+          <div class="af"><div class="afic"><i class="bi bi-book-half"></i></div><div><div class="aft">تحفيظ القرآن الكريم</div><div class="afd">منهج متكامل يضمن حفظ القرآن كاملًا بمراحل منظمة ومتدرجة.</div></div></div>
+          <div class="af"><div class="afic"><i class="bi bi-mortarboard-fill"></i></div><div><div class="aft">تعليم التجويد والتلاوة</div><div class="afd">أحكام التجويد من مشايخ متخصصين لضمان إتقان التلاوة.</div></div></div>
+          <div class="af"><div class="afic"><i class="bi bi-stars"></i></div><div><div class="aft">التربية الإسلامية وبناء الشخصية</div><div class="afd">نرسخ القيم الإسلامية ونبني شخصية مؤمنة متوازنة.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="srv" class="sec">
+  <div class="pg"></div>
+  <div class="w">
+    <div class="tc rv"><div class="tag">خدماتنا</div><h2 class="st">ما نقدمه لأبنائك</h2><p class="ss">منظومة متكاملة من الخدمات التعليمية والتربوية.</p></div>
+    <div class="sg2">
+      <div class="sc rv rv1"><div class="sci2"><i class="bi bi-book-fill"></i></div><div class="sct">تحفيظ القرآن الكريم</div><div class="scd">منهج تدريجي يُمكّن الطالب من حفظ القرآن كاملًا.</div></div>
+      <div class="sc rv rv2"><div class="sci2"><i class="bi bi-volume-up-fill"></i></div><div class="sct">تعليم أحكام التجويد</div><div class="scd">شرح مفصل للقواعد مع تصحيح مباشر من المعلم.</div></div>
+      <div class="sc rv rv1"><div class="sci2"><i class="bi bi-mic-fill"></i></div><div class="sct">تصحيح التلاوة</div><div class="scd">جلسات لتصحيح الأخطاء وتحسين الأداء القرآني.</div></div>
+      <div class="sc rv rv2"><div class="sci2"><i class="bi bi-clipboard2-check-fill"></i></div><div class="sct">اختبارات دورية</div><div class="scd">تقييمات منتظمة تقيس مستوى الطالب وتتتبع تقدمه.</div></div>
+      <div class="sc rv rv1"><div class="sci2"><i class="bi bi-graph-up-arrow"></i></div><div class="sct">متابعة يومية للطلاب</div><div class="scd">تقارير يومية لأولياء الأمور عن مستوى الحفظ.</div></div>
+      <div class="sc rv rv2"><div class="sci2"><i class="bi bi-trophy-fill"></i></div><div class="sct">مسابقات قرآنية</div><div class="scd">مسابقات دورية تحفيزية تُكرم المتميزين.</div></div>
+      <div class="sc rv rv1"><div class="sci2"><i class="bi bi-award-fill"></i></div><div class="sct">إعداد الحفاظ</div><div class="scd">برنامج لتأهيل الطلاب ليكونوا حُفَّاظًا مُتقنين.</div></div>
+      <div class="sc rv rv2"><div class="sci2"><i class="bi bi-people-fill"></i></div><div class="sct">برامج للأطفال والشباب</div><div class="scd">مناهج لكل فئة عمرية تضمن التعلم الممتع.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HALAQAS -->
+<section id="hal" class="sec">
+  <div class="pe" style="opacity:.018"></div>
+  <div class="w">
+    <div class="tc rv">
+      <div class="tag">الحلقات المتاحة</div>
+      <h2 class="st">اختر الحلقة المناسبة لابنك</h2>
+      <p class="ss">كل حلقة محدودة الأماكن لضمان أعلى جودة في التعليم والمتابعة الفردية.</p>
+    </div>
+    <div class="hg">
+      @if (ViewBag.Halaqas != null)
+      {
+          int hi = 0;
+          var levelIcons = new Dictionary<string, string> { {"مبتدئ", "🧒"}, {"متوسط", "📖"}, {"متقدم", "⭐"}, {"تجويد", "🎓"} };
+          var levelClasses = new Dictionary<string, string> { {"مبتدئ", "lv0"}, {"متوسط", "lv1"}, {"متقدم", "lv2"}, {"تجويد", "lv3"} };
+          var levelNames = new Dictionary<string, string> { {"مبتدئ", "للأطفال"}, {"متوسط", "متوسط"}, {"متقدم", "متقدم"}, {"تجويد", "تجويد"} };
+          foreach (var halaqa in ViewBag.Halaqas)
+          {
+              var lvl = (string?)halaqa.Level ?? "مبتدئ";
+              var icon = levelIcons.ContainsKey(lvl) ? levelIcons[lvl] : "🧒";
+              var lvlClass = levelClasses.ContainsKey(lvl) ? levelClasses[lvl] : "lv0";
+              var lvlName = levelNames.ContainsKey(lvl) ? levelNames[lvl] : lvl;
+              var teacherName = halaqa.Teacher != null ? halaqa.Teacher.Name : "غير محدد";
+              var currentStudents = halaqa.Students != null ? ((IEnumerable<object>)halaqa.Students).Count() : 0;
+              var capacity = halaqa.MaxCapacity > 0 ? halaqa.MaxCapacity : 20;
+              var pct = capacity > 0 ? Math.Min(100, (int)((double)currentStudents / capacity * 100)) : 0;
+              var remaining = capacity - currentStudents;
+              string statusClass, statusText;
+              if (remaining <= 0) { statusClass = "st-x"; statusText = "الحلقة ممتلئة — قائمة انتظار"; }
+              else if (remaining <= 3) { statusClass = "st-f"; statusText = "الأماكن تنفد — " + remaining + " فقط"; }
+              else { statusClass = "st-o"; statusText = "متاح — " + remaining + (remaining == 1 ? " مكان" : " أماكن") + " شاغرة"; }
+              string barClass = pct >= 100 ? "cf-r" : pct >= 80 ? "cf-y" : "cf-g";
+              var isFull = remaining <= 0;
+              var delay = hi % 2 == 0 ? "rv1" : "rv2";
+              var hname = halaqa.Name;
+              <div class="hc rv @delay">
+                <div class="hch"><span class="hlv @lvlClass">@icon @lvlName</span><div class="hn">@hname</div><div class="htr"><i class="bi bi-person-fill" style="color:var(--gd)"></i> @teacherName</div></div>
+                <div class="hb">
+                  <div class="hi2">
+                    <div><div class="hil">الأعمار</div><div class="hiv">@(!string.IsNullOrEmpty(halaqa.AgeRange) ? halaqa.AgeRange : "جميع الأعمار")</div></div>
+                    <div><div class="hil">الموعد</div><div class="hiv">@(!string.IsNullOrEmpty(halaqa.Schedule) ? halaqa.Schedule : "يوميًا")</div></div>
+                    <div><div class="hil">الوقت</div><div class="hiv">@(!string.IsNullOrEmpty(halaqa.ClassTime) ? halaqa.ClassTime : "—")</div></div>
+                    <div><div class="hil">الفرع</div><div class="hiv">@(!string.IsNullOrEmpty(halaqa.Location) ? halaqa.Location : "—")</div></div>
+                  </div>
+                  <div class="cpl"><span class="cpt">سعة الحلقة</span><span class="cpc">@currentStudents / @capacity طالب</span></div>
+                  <div class="cpb"><div class="cpf @barClass" style="width:@pct%"></div></div>
+                  <div><span class="cps @statusClass"><i class="bi bi-circle-fill" style="font-size:6px"></i> @statusText</span></div>
+                </div>
+                <div class="hfoot">
+                  <div class="hstu">
+                    @if (currentStudents > 0 && halaqa.Students != null)
+                    {
+                        int maxAv = 3;
+                        int shown = 0;
+                        foreach (var stu in (IEnumerable<object>)halaqa.Students)
+                        {
+                            if (shown >= maxAv) break;
+                            var sname = (string?)stu.GetType().GetProperty("Name")?.GetValue(stu) ?? "";
+                            var initial = sname.Length > 0 ? sname.Substring(0, 1) : "?";
+                            <div class="hav">@initial</div>
+                            shown++;
+                        }
+                        if (currentStudents > maxAv)
+                        {
+                            <div class="hav hav-m">+@(currentStudents - maxAv)</div>
+                        }
+                    }
+                  </div>
+                  @if (isFull)
+                  {
+                      <button class="bg" disabled>ممتلئة</button>
+                  }
+                  else
+                  {
+                      <a href="#reg" class="bg" onclick="preselectH('@hname')">سجل الآن</a>
+                  }
+                </div>
+              </div>
+              hi++;
+          }
+      }
+    </div>
+  </div>
+</section>
+
+<!-- LOCATIONS -->
+<section id="loc" class="sec">
+  <div class="w">
+    <div class="tc rv"><div class="tag">أماكن الحلقات</div><h2 class="st">نلتقي معك في حيّك</h2></div>
+    <div class="lg">
+      <div class="lc rv rv1">
+        <div class="lm"><div class="pg" style="opacity:.12"></div><div class="lpin">📍</div></div>
+        <div class="li"><div class="lb"><i class="bi bi-geo-alt-fill"></i> فرع نشط</div><div class="ln">دوار اللبيدي</div><div class="ld"><i class="bi bi-clock" style="color:var(--gd)"></i> صباحًا ومساءً<br><i class="bi bi-calendar-week" style="color:var(--gd)"></i> السبت – الخميس<br><i class="bi bi-book" style="color:var(--gd)"></i> @ViewBag.TotalHalaqas حلقات متاحة</div><a href="#hal" class="llk">عرض الحلقات <i class="bi bi-arrow-left"></i></a></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PARENT PORTAL -->
+<section id="portal" class="sec">
+  <div class="pe" style="opacity:.03"></div>
+  <div class="w">
+    <div class="rv" style="margin-bottom:28px">
+      <div class="tag">بوابة ولي الأمر</div>
+      <h2 class="st">تابع أبناءك<br>في ثوانٍ</h2>
+      <p class="ss">أدخل رقم هاتفك وشاهد تقارير أبنائك اليومية ومستوى حفظهم وتقييمات المعلم — فورًا.</p>
+    </div>
+    <div class="pbox rv rv1">
+      <div class="ph"><h4>بوابة متابعة الأبناء</h4><p>أدخل رقمك لعرض النتائج</p></div>
+      <div class="pr">
+        <input type="tel" id="pinp" class="pi" placeholder="05xxxxxxxx" dir="ltr">
+        <button class="bg" onclick="showStu()"><i class="bi bi-search"></i> تابع الآن</button>
+      </div>
+      <div class="sw2" id="swrap">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- TEACHERS -->
+<section id="teachers" class="sec">
+  <div class="pg"></div>
+  <div class="w">
+    <div class="tc rv">
+      <div class="tag">كوادرنا التعليمية</div>
+      <h2 class="st">مشايخنا وأساتذتنا</h2>
+      <p class="ss">نخبة من المشايخ المتخصصين الحاصلين على إجازات معتمدة في تحفيظ القرآن الكريم وعلوم التجويد.</p>
+    </div>
+    <div class="tg">
+      @if (ViewBag.Teachers != null)
+      {
+          int ti = 0;
+          foreach (var teacher in ViewBag.Teachers)
+          {
+              var initial = !string.IsNullOrEmpty(teacher.Name) ? teacher.Name.Substring(0, 1) : "م";
+              var delayClass = ti % 2 == 0 ? "rv1" : "rv2";
+              <div class="teachcard rv @delayClass">
+                  <div class="teach-img" style="background:linear-gradient(145deg,var(--nv-m),var(--em-d))">
+                      <div class="teach-img-pat"></div>
+                      <div class="teach-avatar">@initial</div>
+                  </div>
+                  <div class="teach-body">
+                      <div class="teach-name">@teacher.Name</div>
+                      <div class="teach-spec"><i class="bi bi-award-fill"></i> @(!string.IsNullOrEmpty(teacher.Role) ? teacher.Role : "مُعلم")</div>
+                      @if (!string.IsNullOrEmpty(teacher.Description))
+                      {
+                          <div class="teach-desc">@teacher.Description</div>
+                      }
+                  </div>
+              </div>
+              ti++;
+          }
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="ach" class="sec">
+  <div class="w">
+    <div class="tc rv"><div class="tag">إنجازاتنا</div><h2 class="st">لحظات تستحق الاحتفاء</h2></div>
+    <div class="gg rv">
+      <div class="gi"><div class="giph">🏅</div><div class="giov"><i class="bi bi-zoom-in"></i><span>حفل تخرج الحفاظ ٢٠٢٤</span></div></div>
+      <div class="gi"><div class="giph">📜</div><div class="giov"><i class="bi bi-zoom-in"></i><span>تكريم المتميزين</span></div></div>
+      <div class="gi"><div class="giph">🌟</div><div class="giov"><i class="bi bi-zoom-in"></i><span>المسابقة القرآنية السنوية</span></div></div>
+      <div class="gi"><div class="giph">🎓</div><div class="giov"><i class="bi bi-zoom-in"></i><span>الخريجون الجدد</span></div></div>
+      <div class="gi"><div class="giph">📖</div><div class="giov"><i class="bi bi-zoom-in"></i><span>يوم الختمة القرآنية</span></div></div>
+      <div class="gi"><div class="giph">🕌</div><div class="giov"><i class="bi bi-zoom-in"></i><span>حلقات رمضان</span></div></div>
+      <div class="gi"><div class="giph">✨</div><div class="giov"><i class="bi bi-zoom-in"></i><span>لحظات من رحلة الحفظ</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section id="join" class="sec">
+  <div class="w">
+    <div class="tc rv"><div class="tag">كيفية الانضمام</div><h2 class="st">رحلة الحفظ في أربع خطوات</h2></div>
+    <div class="steps rv rv1">
+      <div class="step"><div class="stn">١</div><div class="stt">تعبئة النموذج</div><div class="std">أكمل نموذج التسجيل بمعلومات الطالب ومكان الحلقة.</div></div>
+      <div class="step"><div class="stn">٢</div><div class="stt">مراجعة الطلب</div><div class="std">يتواصل معك فريقنا خلال ٢٤ ساعة من استلام الطلب.</div></div>
+      <div class="step"><div class="stn">٣</div><div class="stt">تحديد الحلقة</div><div class="std">نحدد الحلقة الأنسب لعمر الطالب ومستواه.</div></div>
+      <div class="step"><div class="stn">٤</div><div class="stt">بدء رحلة الحفظ</div><div class="std">ينطلق ابنك في رحلة إيمانية نحو حفظ كتاب الله.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="tst" class="sec">
+  <div class="pg"></div>
+  <div class="w">
+    <div class="tc rv"><div class="tag">آراء أولياء الأمور</div><h2 class="st">ماذا يقول عنّا أهل الطلاب</h2></div>
+    <div class="tcar rv">
+      <div class="ttr" id="ttr">
+        <div class="tcard"><div class="tcin"><span class="tcq">"</span><p class="tctx">منذ انضم ابني لمنصة تاج الوقار لاحظتُ تغيرًا كبيرًا في التزامه ومحبته للقرآن. المعلم يتابعه باستمرار ونتائجه في تحسن مستمر.</p><div class="tcau"><div class="tcav" style="background:linear-gradient(135deg,var(--em),var(--gd))">م</div><div><div class="tcn">أم محمد العمري</div><div class="tcr">والدة طالب — دوار اللبيدي</div><div class="tcs">⭐⭐⭐⭐⭐</div></div></div></div></div>
+        <div class="tcard"><div class="tcin"><span class="tcq">"</span><p class="tctx">جرّبنا حلقات كثيرة من قبل لكن تاج الوقار مختلفة تمامًا. الأسلوب محترف والمتابعة منتظمة وابنتي تحفظ بثقة.</p><div class="tcau"><div class="tcav" style="background:linear-gradient(135deg,var(--nv),var(--gd))">أ</div><div><div class="tcn">أبو سارة الزهراني</div><div class="tcr">ولي أمر طالبة — دوار اللبيدي</div><div class="tcs">⭐⭐⭐⭐⭐</div></div></div></div></div>
+        <div class="tcard"><div class="tcin"><span class="tcq">"</span><p class="tctx">ما يميز تاج الوقار هو الشفافية الكاملة. أعرف كل يوم ماذا حفظ ابني وكيف كان أداؤه — هذا أشعرني بالاطمئنان التام.</p><div class="tcau"><div class="tcav" style="background:linear-gradient(135deg,var(--gd),var(--em-d))">خ</div><div><div class="tcn">أم خالد الحربي</div><div class="tcr">والدة طالبَين — دوار اللبيدي</div><div class="tcs">⭐⭐⭐⭐⭐</div></div></div></div></div>
+      </div>
+    </div>
+    <div class="tcc rv">
+      <button class="ta" onclick="ts(-1)"><i class="bi bi-chevron-right"></i></button>
+      <div class="tds"><button class="td on" onclick="tg(0)"></button><button class="td" onclick="tg(1)"></button><button class="td" onclick="tg(2)"></button></div>
+      <button class="ta" onclick="ts(1)"><i class="bi bi-chevron-left"></i></button>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="sec">
+  <div class="w">
+    <div class="fg2">
+      <div class="rv">
+        <div class="tag">أسئلة شائعة</div>
+        <h2 class="st">كل ما تريد معرفته</h2>
+        <p class="ss">إذا لم تجد إجابتك هنا تواصل معنا مباشرة.</p>
+        <a href="#footer" class="bg" style="margin-top:18px;display:inline-flex"><i class="bi bi-chat-dots-fill"></i> تواصل معنا</a>
+      </div>
+      <div class="rv rv1">
+        <div class="fl">
+          <div class="fi op"><div class="fq" onclick="ft(this)"><span>كيف يتم التسجيل في منصة تاج الوقار؟</span><div class="fic"><i class="bi bi-plus"></i></div></div><div class="fa">التسجيل يتم من خلال تعبئة نموذج التسجيل الإلكتروني أو التواصل معنا مباشرة. يتواصل معك فريقنا خلال ٢٤ ساعة.</div></div>
+          <div class="fi"><div class="fq" onclick="ft(this)"><span>ما الأعمار المناسبة للانضمام إلى الحلقات؟</span><div class="fic"><i class="bi bi-plus"></i></div></div><div class="fa">نستقبل الطلاب من عمر ٦ سنوات وما فوق. لدينا حلقات مخصصة للأطفال والشباب والكبار والبنات.</div></div>
+          <div class="fi"><div class="fq" onclick="ft(this)"><span>هل توجد اختبارات دورية لتقييم الطلاب؟</span><div class="fic"><i class="bi bi-plus"></i></div></div><div class="fa">نعم، تقييمات أسبوعية وشهرية وفصلية. يُرسل ولي الأمر تقريرًا تفصيليًا بعد كل اختبار.</div></div>
+          <div class="fi"><div class="fq" onclick="ft(this)"><span>كيف أتابع مستوى ابني يوميًا؟</span><div class="fic"><i class="bi bi-plus"></i></div></div><div class="fa">عبر بوابة ولي الأمر في هذه الصفحة. أدخل رقم هاتفك لتظهر نتائج ابنك وتقاريره اليومية فورًا.</div></div>
+          <div class="fi"><div class="fq" onclick="ft(this)"><span>ما هي أماكن الحلقات المتاحة؟</span><div class="fic"><i class="bi bi-plus"></i></div></div><div class="fa">فرع: دوار اللبيدي (٤ حلقات). نعمل على التوسع لخدمة مزيد من الأسر.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTER -->
+<section id="reg" class="sec">
+  <div class="pg"></div>
+  <div class="w">
+    <div class="tc rv" style="margin-bottom:32px"><div class="tag">التسجيل</div><h2 class="st">ابدأ رحلة ابنك اليوم</h2><p class="ss">النموذج يستغرق أقل من دقيقتين.</p></div>
+    <div style="max-width:740px;margin:0 auto" class="rv rv1">
+      <div class="fc">
+        <form id="regForm" onsubmit="event.preventDefault(); submitRegistrationForm();" enctype="multipart/form-data">
+          <div class="fg3">
+            <div class="fgrp"><label class="flb">اسم الطالب *</label><input type="text" class="fin" id="regStudentName" name="StudentName" placeholder="أدخل اسم الطالب الكامل" required><span class="ferr" id="nameErr"></span></div>
+            <div class="fgrp"><label class="flb">عمر الطالب</label><input type="number" class="fin" id="regAge" name="Age" placeholder="العمر بالسنوات" min="6"></div>
+            <div class="fgrp"><label class="flb">الجنس</label>
+              <select class="fin" id="regGender" name="gender">
+                <option value="Male">ذكر</option>
+                <option value="Female">أنثى</option>
+              </select>
+            </div>
+            <div class="fgrp"><label class="flb">صورة الطالب</label><input type="file" class="fin" id="regImage" name="ProfileImage" accept="image/*" style="padding:8px"></div>
+            <div class="fgrp"><label class="flb">اسم ولي الأمر *</label><input type="text" class="fin" id="regParentName" name="ParentName" placeholder="أدخل اسم ولي الأمر" required><span class="ferr" id="parentNameErr"></span></div>
+            <div class="fgrp"><label class="flb">رقم الهاتف *</label><input type="tel" class="fin" id="regParentPhone" name="ParentPhone" placeholder="01xxxxxxxxx" dir="ltr" required><span class="ferr" id="phoneErr"></span></div>
+            <div class="fgrp"><label class="flb">الحلقة المفضلة</label>
+              <select class="fin" id="halSel" name="PreferredHalaqaId">
+                <option value="">اختر الحلقة (اختياري)</option>
+                @if (ViewBag.Halaqas != null)
+                {
+                    foreach (var h in ViewBag.Halaqas)
+                    {
+                        <option value="@h.Id">@h.Name @(!string.IsNullOrEmpty(h.Location) ? "(" + h.Location + ")" : "")</option>
+                    }
+                }
+              </select>
+            </div>
+            <div class="fgrp"><label class="flb">المستوى الحالي</label>
+              <select class="fin" id="regLevel" name="LastLevelOfMemorization">
+                <option value="">اختر المستوى</option>
+                <option value="مبتدئ">مبتدئ</option>
+                <option value="يحفظ بعض السور">يحفظ بعض السور</option>
+                <option value="حفظ جزء أو أكثر">حفظ جزء أو أكثر</option>
+              </select>
+            </div>
+            <div class="fgrp full"><label class="flb">العنوان</label><input type="text" class="fin" id="regAddress" name="Address" placeholder="العنوان (اختياري)"></div>
+            <div class="fgrp full fsb">
+              <button type="submit" class="bg" id="regSubmitBtn"><i class="bi bi-send-fill"></i> إرسال طلب التسجيل</button>
+              <p class="fnt">سيتواصل معك فريقنا خلال ٢٤ ساعة</p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="pe" style="opacity:.04"></div>
+  <div class="w" style="position:relative;z-index:1">
+    <div class="ft">
+      <div>
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:9px">
+          <div class="ni">📖</div>
+          <div><div style="font-family:var(--fd);font-size:18px;font-weight:700;color:#fff">تاج الوقار</div><div style="font-size:9px;color:var(--gd)">منصة تحفيظ القرآن الكريم</div></div>
+        </div>
+        <p class="fd">منصة متخصصة في تحفيظ القرآن الكريم وتعليم التجويد وبناء جيل مؤمن.</p>
+        <div class="socs">
+          <a href="#" class="soc"><i class="bi bi-whatsapp"></i></a>
+          <a href="#" class="soc"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="soc"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="soc"><i class="bi bi-telegram"></i></a>
+        </div>
+      </div>
+      <div><div class="fct">روابط سريعة</div><ul class="flks"><li><a href="#hero">الرئيسية</a></li><li><a href="#about">عن المنصة</a></li><li><a href="#hal">الحلقات المتاحة</a></li><li><a href="#loc">أماكن الحلقات</a></li><li><a href="#ach">الإنجازات</a></li></ul></div>
+      <div><div class="fct">الخدمات</div><ul class="flks"><li><a href="#srv">تحفيظ القرآن</a></li><li><a href="#srv">تعليم التجويد</a></li><li><a href="#portal">بوابة ولي الأمر</a></li><li><a href="#reg">التسجيل</a></li><li><a href="#faq">أسئلة شائعة</a></li></ul></div>
+      <div><div class="fct">تواصل معنا</div><ul class="flks"><li><a href="#"><i class="bi bi-telephone" style="color:var(--gd);margin-left:5px"></i> 05xxxxxxxx</a></li><li><a href="#"><i class="bi bi-envelope" style="color:var(--gd);margin-left:5px"></i> info@tajwaqar.com</a></li><li><a href="#"><i class="bi bi-geo-alt" style="color:var(--gd);margin-left:5px"></i> دوار اللبيدي</a></li></ul></div>
+    </div>
+    <div class="fb"><div class="fsl">تاج الوقار .. حيث يبدأ طريق أهل القرآن</div><div class="fcp">© ٢٠٢٥ منصة تاج الوقار · جميع الحقوق محفوظة</div></div>
+  </div>
+</footer>
+
+<div id="toast"><i class="bi bi-check-circle-fill" style="font-size:15px"></i><span id="tmsg"></span></div>
+
+<!-- PWA INSTALL -->
+<script>
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js', { scope: '/' }).then(reg => {
+            console.log('Public ServiceWorker registered');
+        }).catch(err => {
+            console.error('Public ServiceWorker registration failed', err);
+        });
+    });
+}
+
+let deferredPrompt;
+const installContainer = document.createElement('div');
+installContainer.style.cssText = 'position:fixed;bottom:18px;left:14px;z-index:99999;display:none';
+installContainer.innerHTML = '<button id="installBtn" class="bg" style="padding:10px 18px;font-size:13px;background:linear-gradient(135deg,#c9a24b,#a87b2e);box-shadow:0 4px 16px rgba(0,0,0,.3)">📲 تثبيت التطبيق</button>';
+document.body.appendChild(installContainer);
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installContainer.style.display = 'block';
+    document.getElementById('installBtn').addEventListener('click', () => {
+        installContainer.style.display = 'none';
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted install');
+            }
+            deferredPrompt = null;
+        });
+    });
+});
+</script>
+
+<script>
+// CHART DATA
+const CI={},CT={};
+
+function bldCh(cvId,si,ti,stuId){
+  const el=document.getElementById(cvId);
+  if(!el)return;
+  if(CI[cvId])CI[cvId].destroy();
+  const stuData=SD[stuId],sessions=stuData?stuData.sessions:[];
+  const sorted=[...sessions];
+  const labels=sorted.map(s=>s.date.substring(5));
+  let data,label,type;
+  if(ti===0){
+    data=sorted.map(s=>s.memorizationScore||0);
+    label='درجة الحفظ';type='line';
+  }else if(ti===1){
+    data=sorted.map(s=>s.isPresent?1:0);
+    label='الحضور';type='bar';
+  }else{
+    data=sorted.map(s=>s.score||0);
+    label='التقييم';type='line';
+  }
+  const clr=ti===0?'#22a06b':ti===1?'#c9a24b':'#2196F3';
+  const bg=ti===0?'rgba(34,160,107,.15)':ti===1?'rgba(201,162,75,.15)':'rgba(33,150,243,.15)';
+  CI[cvId]=new Chart(el,{
+    type:type,data:{labels,datasets:[{label,data,borderColor:clr,backgroundColor:bg,borderWidth:2.5,pointBackgroundColor:clr,pointRadius:4,pointHoverRadius:6,fill:true,tension:0.4,borderRadius:type==='bar'?5:0}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{rtl:true,titleFont:{family:"'Cairo',sans-serif",size:11},bodyFont:{family:"'Cairo',sans-serif",size:12},callbacks:{label:c=>` ${c.parsed.y} ${label}`}}},scales:{x:{ticks:{color:'rgba(255,255,255,.4)',font:{family:"'Cairo',sans-serif",size:10}},grid:{color:'rgba(255,255,255,.05)'}},y:{beginAtZero:true,ticks:{color:'rgba(255,255,255,.4)',font:{family:"'Cairo',sans-serif",size:10}},grid:{color:'rgba(255,255,255,.05)'}}}}
+  });
+}
+
+const SD={};
+function togC(cid,wid,cvId,si,stuId){
+  const card=document.getElementById(cid),wrap=document.getElementById(wid);
+  const isOp=wrap.classList.contains('op');
+  document.querySelectorAll('.chw').forEach(w=>w.classList.remove('op'));
+  document.querySelectorAll('.stuc').forEach(c=>c.classList.remove('exp'));
+  if(!isOp){wrap.classList.add('op');card.classList.add('exp');setTimeout(()=>bldCh(cvId,si,CT[cvId]||0,stuId),60)}
+}
+
+function swT(tabsId,cvId,ti,si,stuId){
+  document.querySelectorAll(`#${tabsId} .ctab`).forEach((t,i)=>t.classList.toggle('on',i===ti));
+  CT[cvId]=ti;bldCh(cvId,si,ti,stuId);
+}
+
+// PORTAL - REAL BACKEND
+function showStu(){
+  const v=document.getElementById('pinp').value.replace(/\D/g,'');
+  if(v.length>=9){
+    const wrap=document.getElementById('swrap');
+    wrap.innerHTML='<div style="text-align:center;padding:20px;color:rgba(255,255,255,.5)"><i class="bi bi-hourglass-split" style="font-size:24px"></i><br>جاري البحث...</div>';
+    wrap.classList.add('sh');
+    fetch('/Home/GetParentData?phone='+encodeURIComponent(v))
+      .then(r=>r.json())
+      .then(d=>{
+        wrap.innerHTML='';
+        if(d.success){
+          let si=0;
+          d.halaqat.forEach(h=>{
+            h.students.forEach(stu=>{
+              if(stu.isMyChild){
+                SD[stu.id]={sessions:stu.sessions||[],awjoh:stu.awjoh,targetPages:stu.targetPages};
+                const cardId='s'+stu.id;
+                const chartId='cv'+stu.id;
+                const wrapId='c'+stu.id;
+                const tabsId='ct'+stu.id;
+                const genderColor=stu.gender==='Female'?'linear-gradient(135deg,#1a3a66,#c9a24b)':'linear-gradient(135deg,#1a7a50,#c9a24b)';
+                const names=stu.name.split(' ');
+                const initial=names.map(s=>s[0]).join('').substring(0,2);
+                const pct=stu.targetPages>0?Math.round(stu.awjoh/stu.targetPages*100):0;
+                const avatarHtml=stu.profileImageUrl?`<img src="${stu.profileImageUrl}" class="stua-img" alt="">`:`<div class="stua" style="background:${genderColor}">${initial}</div>`;
+                wrap.innerHTML+=`
+                  <div class="stuc" id="${cardId}">
+                    <div class="stuh" onclick="togC('${cardId}','${wrapId}','${chartId}',${si},${stu.id})">
+                      ${avatarHtml}
+                      <div style="flex:1;min-width:0">
+                        <div class="stun">${stu.name}</div>
+                        <div class="stulv">${h.name} · ${h.sheikh}</div>
+                        <div class="stubg"><span class="sbg bgr">${stu.attendance>=80?'منتظم':'غير منتظم'}</span></div>
+                      </div>
+                      <button class="exb"><i class="bi bi-chevron-down"></i></button>
+                    </div>
+                    <div class="stust">
+                      <div class="ss2"><span class="ssv">${pct}%</span><div class="ssl">الإنجاز</div></div>
+                      <div class="ss2"><span class="ssv">${stu.awjoh||0}</span><div class="ssl">وجها</div></div>
+                      <div class="ss2"><span class="ssv">${stu.attendance}%</span><div class="ssl">الحضور</div></div>
+                      <div class="ss2"><span class="ssv">${stu.points||0}</span><div class="ssl">النقاط</div></div>
+                    </div>
+                    <div class="chw" id="${wrapId}">
+                      <div class="chi">
+                        <div class="ctabs" id="${tabsId}">
+                          <button class="ctab" onclick="swT('${tabsId}','${chartId}',0,${si},${stu.id})">الحفظ</button>
+                          <button class="ctab" onclick="swT('${tabsId}','${chartId}',1,${si},${stu.id})">الحضور</button>
+                          <button class="ctab on" onclick="swT('${tabsId}','${chartId}',2,${si},${stu.id})">الانتظام</button>
+                        </div>
+                        <div class="ccw"><canvas id="${chartId}"></canvas></div>
+                      </div>
+                    </div>
+                  </div>
+                `;
+                si++;
+              }
+            });
+          });
+          const firstCard=wrap.querySelector('.stuc');
+          if(firstCard){
+            firstCard.classList.add('exp');
+            const firstChart=firstCard.querySelector('.chw');
+            if(firstChart)firstChart.classList.add('op');
+            setTimeout(()=>{
+              const fc=firstCard.querySelector('.ccw canvas');
+              if(fc)setTimeout(()=>bldCh(fc.id,2,2,parseInt(fc.id.replace('cv',''))),60);
+            },100);
+          }
+          toast('تم العثور على بيانات أبنائك ✓');
+          setTimeout(()=>wrap.scrollIntoView({behavior:'smooth',block:'nearest'}),200);
+        } else {
+          wrap.innerHTML='<div style="text-align:center;padding:20px;color:rgba(255,255,255,.5)">لم يتم العثور على بيانات لهذا الرقم</div>';
+          toast('لم يتم العثور على بيانات');
+        }
+      })
+      .catch(()=>{
+        wrap.innerHTML='<div style="text-align:center;padding:20px;color:rgba(255,255,255,.5)">حدث خطأ في الاتصال</div>';
+        toast('حدث خطأ في الاتصال');
+      });
+  } else toast('يرجى إدخال رقم هاتف صحيح');
+}
+document.getElementById('pinp').addEventListener('keydown',e=>{if(e.key==='Enter')showStu()});
+
+// NAV
+const navEl=document.getElementById('nav');
+window.addEventListener('scroll',()=>navEl.classList.toggle('sc',scrollY>52),{passive:true});
+const ham=document.getElementById('nh'),mob=document.getElementById('mob'),ovl=document.getElementById('ovl');
+ham.addEventListener('click',()=>{const op=mob.classList.toggle('op');ovl.classList.toggle('sh',op);ham.classList.toggle('op',op)});
+function cm(){mob.classList.remove('op');ovl.classList.remove('sh');ham.classList.remove('op')}
+
+// FAQ
+function ft(el){const i=el.parentElement;const o=i.classList.contains('op');document.querySelectorAll('.fi').forEach(x=>x.classList.remove('op'));if(!o)i.classList.add('op')}
+
+// CAROUSEL
+let tc=0;
+function ts(d){tc=(tc+d+3)%3;tu()}
+function tg(i){tc=i;tu()}
+function tu(){document.getElementById('ttr').style.transform=`translateX(${tc*100}%)`;document.querySelectorAll('.td').forEach((d,i)=>d.classList.toggle('on',i===tc))}
+setInterval(()=>ts(1),5500);
+
+// FORM
+function clearFieldErrors(){
+  document.querySelectorAll('.ferr').forEach(e=>e.textContent='');
+  document.querySelectorAll('.fin').forEach(e=>e.style.borderColor='transparent');
+}
+function showFieldError(id,msg){
+  document.getElementById(id).textContent=msg;
+  const input=id.replace('Err','');
+  const el=document.getElementById(input);
+  if(el)el.style.borderColor='#e53935';
+}
+function isValidEgyptianPhone(phone){
+  return /^01[0125]\d{8}$/.test(phone.replace(/\D/g,''));
+}
+function submitRegistrationForm(){
+  clearFieldErrors();
+  const btn=document.getElementById('regSubmitBtn');
+  const name=document.getElementById('regStudentName').value.trim();
+  const pname=document.getElementById('regParentName').value.trim();
+  const phone=document.getElementById('regParentPhone').value.trim();
+  let valid=true;
+  if(!name){showFieldError('nameErr','هذا الحقل مطلوب');valid=false}
+  if(!pname){showFieldError('parentNameErr','هذا الحقل مطلوب');valid=false}
+  if(!phone){showFieldError('phoneErr','هذا الحقل مطلوب');valid=false}
+  else if(!isValidEgyptianPhone(phone)){showFieldError('phoneErr','رقم مصري صحيح: 01xxxxxxxxx (11 رقمًا)');valid=false}
+  if(!valid)return;
+  const formData=new FormData(document.getElementById('regForm'));
+  btn.innerHTML='<i class="bi bi-hourglass-split"></i> جاري الإرسال...';btn.disabled=true;
+  fetch('/Home/SubmitRegistration',{method:'POST',body:formData})
+    .then(r=>r.json())
+    .then(d=>{
+      if(d.success){
+        btn.innerHTML='<i class="bi bi-check-circle-fill"></i> تم إرسال الطلب بنجاح!';
+        btn.style.background='linear-gradient(135deg,#22a06b,#0d5c3a)';
+        toast(d.message);
+        document.getElementById('regForm').reset();
+        clearFieldErrors();
+      } else {
+        btn.innerHTML='<i class="bi bi-send-fill"></i> إرسال طلب التسجيل';
+        btn.disabled=false;
+        toast(d.message||'حدث خطأ');
+      }
+    })
+    .catch(()=>{
+      btn.innerHTML='<i class="bi bi-send-fill"></i> إرسال طلب التسجيل';
+      btn.disabled=false;
+      toast('حدث خطأ في الاتصال');
+    });
+}
+
+// PRESELECT HALAQA
+function preselectH(keyword){
+  const s=document.getElementById('halSel');
+  for(let i=0;i<s.options.length;i++){if(s.options[i].text.includes(keyword)){s.selectedIndex=i;break}}
+  document.getElementById('reg').scrollIntoView({behavior:'smooth'});
+}
+
+// TOAST
+function toast(msg){
+  const t=document.getElementById('toast');
+  document.getElementById('tmsg').textContent=msg;
+  t.style.display='flex';
+  requestAnimationFrame(()=>{t.style.opacity='1';t.style.transform='translateY(0)'});
+  setTimeout(()=>{t.style.opacity='0';t.style.transform='translateY(14px)';setTimeout(()=>t.style.display='none',300)},3200);
+}
+
+// REVEAL
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.08});
+document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>

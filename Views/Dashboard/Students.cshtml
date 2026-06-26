@@ -1,0 +1,152 @@
+@model IEnumerable<ElMaherQuranSchool.Models.Student>
+@{
+    ViewData["Title"] = "الطلاب";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap:wrap; gap:10px;">
+        <h3 style="margin: 0; color: var(--gold);">قائمة الطلاب المسجلين</h3>
+        <a href="/Dashboard/AddStudent" class="btn">➕ إضافة طالب</a>
+    </div>
+
+    <form method="get" action="/Dashboard/Students" id="filterForm" style="display:flex; gap:12px; margin-bottom: 24px; flex-wrap: wrap; background: var(--gold-pale); padding: 16px; border-radius: 12px; border: 1px solid var(--beige-dark);">
+        <div style="flex: 1; min-width: 250px; position: relative;">
+            <input type="text" id="searchInput" name="search" value="@ViewBag.Search" placeholder="بحث باسم الطالب أو الرقم التسلسلي..." 
+                   style="width: 100%; padding: 12px 16px; border: 2px solid var(--beige-dark); border-radius: 8px; font-family: inherit; font-size: .95rem; outline: none; transition: border-color .3s; box-sizing: border-box;"
+                   onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--beige-dark)'"
+                   oninput="filterStudents()">
+            <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--gold); pointer-events: none; font-size: 1.1rem;">🔍</span>
+        </div>
+        
+        <div style="min-width: 200px;">
+            <select name="halaqaId" onchange="this.form.submit()" 
+                    style="width: 100%; padding: 12px 16px; border: 2px solid var(--beige-dark); border-radius: 8px; font-family: inherit; font-size: .95rem; outline: none; background: white; cursor: pointer; transition: border-color .3s; box-sizing: border-box;"
+                    onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--beige-dark)'">
+                <option value="">كل الحلقات</option>
+                @if (ViewBag.Halaqas != null)
+                {
+                    foreach (var h in (IEnumerable<ElMaherQuranSchool.Models.Halaqa>)ViewBag.Halaqas)
+                    {
+                        <option value="@h.Id" selected="@(ViewBag.HalaqaId == h.Id)">@h.Name</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div style="display: flex; gap: 8px;">
+            @if (!string.IsNullOrEmpty(ViewBag.Search) || ViewBag.HalaqaId != null)
+            {
+                <a href="/Dashboard/Students" style="padding: 12px 16px; background: #ffebee; color: #f44336; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: .9rem; border: 1px solid #ffcdd2; display: flex; align-items: center; transition: .2s;" 
+                   onmouseover="this.style.background='#ffcdd2'" onmouseout="this.style.background='#ffebee'">مسح الفلاتر</a>
+            }
+        </div>
+    </form>
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>الرقم التسلسلي</th>
+                    <th>اسم الطالب</th>
+                    <th>إجمالي الأوجه</th>
+                    <th>الحلقة</th>
+                    <th>رقم ولي الامر</th>
+                    <th>إجراءات</th>
+                </tr>
+            </thead>
+            <tbody id="studentTableBody">
+                @foreach (var student in Model)
+                {
+                    <tr>
+                        <td><span style="background:var(--beige-dark); padding:4px 8px; border-radius:4px; font-weight:bold;">@student.SerialNumber</span></td>
+                        <td>@student.Name</td>
+                        <td>@student.TotalMemorizedPages وجه</td>
+                        <td>
+                            @if(student.Halaqa != null) 
+                            { 
+                                <span style="background:var(--gold-pale); color:var(--gold); padding:4px 10px; border-radius:50px; font-size:.85rem; font-weight:bold;">@student.Halaqa.Name</span> 
+                            } 
+                            else 
+                            { 
+                                <span style="color:var(--text-soft);">غير مسجل</span> 
+                            }
+                        </td>
+                        <td style="direction: ltr; text-align: right; font-weight:bold;">
+                            @{
+                                var cleanPhone = student.ParentPhone.Replace(" ", "").Replace("+", "").Replace("-", "");
+                                if (cleanPhone.StartsWith("0")) { cleanPhone = "20" + cleanPhone.Substring(1); }
+                            }
+                            <a href="https://wa.me/@cleanPhone" target="_blank" style="text-decoration:none; color:inherit;">
+                                🟢 @student.ParentPhone
+                            </a>
+                        </td>
+                        <td>
+                            <div style="display:flex; gap:10px; align-items:center;">
+                                <a href="/Dashboard/StudentProgress/@student.Id" style="color:#2196F3; text-decoration:none; font-weight:bold;">المتابعة</a>
+                                <a href="/Dashboard/EditStudent/@student.Id" style="color:black; text-decoration:none; font-weight:bold;">✏️ تعديل</a>
+                                <form method="post" action="/Dashboard/DeleteStudent" style="display:inline;" onsubmit="return confirmDelete(this, 'هل أنت متأكد من حذف هذا الطالب؟ سيتم حذف جميع بياناته وسجلات حضوره بشكل نهائي.')">
+                                    <input type="hidden" name="id" value="@student.Id" />
+                                    <button type="submit" style="background:none; border:none; color:#f44336; font-weight:bold; cursor:pointer; padding:0; font-family:inherit; font-size:inherit;">حذف</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        
+        @if(!Model.Any())
+        {
+            <div id="initialNoResults" style="text-align:center; padding: 40px 20px; color:var(--text-soft);">
+                لا يوجد طلاب مسجلين حالياً.
+            </div>
+        }
+        <div id="dynamicNoResults" style="display:none; text-align:center; padding: 40px 20px; color:var(--text-soft);">
+            لا توجد نتائج تطابق بحثك.
+        </div>
+    </div>
+</div>
+
+<script>
+    function filterStudents() {
+        const input = document.getElementById('searchInput');
+        const filter = input.value.toLowerCase();
+        const tbody = document.getElementById('studentTableBody');
+        const rows = tbody.getElementsByTagName('tr');
+        const dynamicNoResults = document.getElementById('dynamicNoResults');
+        let foundAny = false;
+
+        for (let i = 0; i < rows.length; i++) {
+            const serialCell = rows[i].getElementsByTagName('td')[0];
+            const nameCell = rows[i].getElementsByTagName('td')[1];
+            const phoneCell = rows[i].getElementsByTagName('td')[4];
+            
+            if (serialCell && nameCell) {
+                const serialText = serialCell.textContent || serialCell.innerText;
+                const nameText = nameCell.textContent || nameCell.innerText;
+                const phoneText = phoneCell ? (phoneCell.textContent || phoneCell.innerText) : "";
+                
+                if (serialText.toLowerCase().trim().startsWith(filter) || 
+                    nameText.toLowerCase().trim().startsWith(filter) || 
+                    phoneText.trim().includes(filter)) {
+                    rows[i].style.display = "";
+                    foundAny = true;
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+
+        if (dynamicNoResults) {
+            dynamicNoResults.style.display = foundAny ? "none" : "block";
+        }
+    }
+
+    // Run filter on load if there's an initial search value
+    window.addEventListener('load', () => {
+        if (document.getElementById('searchInput').value) {
+            filterStudents();
+        }
+    });
+</script>
