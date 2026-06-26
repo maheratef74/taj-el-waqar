@@ -60,8 +60,8 @@ section{position:relative;overflow:hidden}
 .pg{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23c9a24b' stroke-width='.7'%3E%3Cpolygon points='30,4 56,19 56,49 30,57 4,49 4,19'/%3E%3Cpolygon points='30,14 46,23 46,43 30,49 14,43 14,23'/%3E%3C/g%3E%3C/svg%3E");background-size:60px}
 
 /* NAV */
-#nav{position:fixed;inset:0 0 auto;z-index:9999;transition:var(--tr),transform .35s ease}
-#nav.sc{background:rgba(255,255,255,.96);backdrop-filter:blur(18px);box-shadow:var(--s1)}
+#nav{position:fixed;inset:0 0 auto;z-index:9999;transition:background .3s ease,box-shadow .3s ease,transform .35s ease;background:transparent}
+#nav.sc{background:rgba(11,31,58,.96);backdrop-filter:blur(18px);box-shadow:var(--s1)}
 .nw{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;gap:10px}
 @@media(min-width:640px){.nw{padding:14px 28px}}
 @@media(min-width:1024px){.nw{padding:15px 48px}}
@@ -70,12 +70,12 @@ section{position:relative;overflow:hidden}
 .ni-img{width:36px;height:36px;border-radius:50%;flex-shrink:0;object-fit:cover;border:2px solid rgba(255,255,255,.2)}
 .nn{font-family:var(--fd);font-size:18px;font-weight:700;color:#fff;transition:var(--tr)}
 .nb{font-size:9px;color:var(--gd-l);transition:var(--tr)}
-#nav.sc .nn{color:var(--nv)}
-#nav.sc .nb{color:var(--gd)}
+#nav.sc .nn{color:#fff}
+#nav.sc .nb{color:var(--gd-l)}
 .nlks{display:none;list-style:none;gap:2px;align-items:center}
 @@media(min-width:1050px){.nlks{display:flex}}
 .nlks a{font-size:12px;font-weight:500;color:rgba(255,255,255,.82);padding:6px 10px;border-radius:7px;transition:var(--tr)}
-#nav.sc .nlks a{color:var(--tx)}
+#nav.sc .nlks a{color:rgba(255,255,255,.9)}
 .nlks a:hover{background:var(--gd-p);color:var(--gd)!important}
 .nr{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .nc{display:none}
@@ -84,7 +84,7 @@ section{position:relative;overflow:hidden}
 .nh{background:none;border:none;cursor:pointer;width:36px;height:36px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border-radius:8px}
 @@media(min-width:1050px){.nh{display:none}}
 .nh span{width:21px;height:2px;background:#fff;border-radius:2px;transition:var(--tr);display:block}
-#nav.sc .nh span{background:var(--nv)}
+#nav.sc .nh span{background:#fff}
 .nh.op span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .nh.op span:nth-child(2){opacity:0}
 .nh.op span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
@@ -139,7 +139,7 @@ section{position:relative;overflow:hidden}
 @@keyframes sda{0%{transform:translateY(0);opacity:1}100%{transform:translateY(10px);opacity:0}}
 
 /* STICKY PORTAL STRIP */
-#pstrip{background:linear-gradient(135deg,var(--em),var(--nv));padding:0;position:sticky;top:62px;z-index:998;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+#pstrip{background:linear-gradient(135deg,var(--em),var(--nv));padding:0;position:sticky;top:62px;z-index:998;box-shadow:0 4px 20px rgba(0,0,0,.25);transition:transform .35s ease}
 .psi{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;gap:10px;flex-wrap:wrap}
 @@media(min-width:640px){.psi{padding:11px 28px}}
 .pst{display:flex;align-items:center;gap:9px}
@@ -514,19 +514,6 @@ select.fin{appearance:none;cursor:pointer}
   <div class="sci"><div class="sw"><div class="sd"></div></div><span>تمرير للأسفل</span></div>
 </section>
 
-<!-- STICKY STRIP -->
-<div id="pstrip">
-  <div class="psi w">
-    <div class="pst">
-      <div class="ico">📊</div>
-      <div>
-        <div class="lbl">بوابة ولي الأمر</div>
-        <div class="sub">تابع أبناءك يوميًا بسهولة تامة</div>
-      </div>
-    </div>
-    <div class="pstrip-btn"><a href="#portal" class="bg"><i class="bi bi-people-fill"></i> تابع أبناءك</a></div>
-  </div>
-</div>
 
 <!-- ABOUT -->
 <section id="about" class="sec">
@@ -1065,16 +1052,24 @@ document.getElementById('pinp').addEventListener('keydown',e=>{if(e.key==='Enter
 
 // NAV
 const navEl=document.getElementById('nav');
+const ham=document.getElementById('nh'),mob=document.getElementById('mob'),ovl=document.getElementById('ovl');
+if(ham)ham.addEventListener('click',()=>{const op=mob.classList.toggle('op');ovl.classList.toggle('sh',op);ham.classList.toggle('op',op)});
+function cm(){if(mob)mob.classList.remove('op');if(ovl)ovl.classList.remove('sh');if(ham)ham.classList.remove('op')}
 let lastScroll=0;
 window.addEventListener('scroll',()=>{
   const sy=scrollY;
-  navEl.classList.toggle('sc',sy>52);
-  navEl.style.transform=sy>lastScroll&&sy>80?'translateY(-100%)':'translateY(0)';
+  if(navEl){
+    navEl.classList.toggle('sc',sy>52);
+    if(sy<=10){navEl.style.transform='translateY(0)'}
+    else{navEl.style.transform=sy>lastScroll&&sy>80?'translateY(-100%)':'translateY(0)'}
+  }
+  const ps=document.getElementById('pstrip');
+  if(ps){
+    if(sy<=10){ps.style.transform='translateY(0)'}
+    else{ps.style.transform=sy>lastScroll&&sy>120?'translateY(-100%)':'translateY(0)'}
+  }
   lastScroll=sy;
 },{passive:true});
-const ham=document.getElementById('nh'),mob=document.getElementById('mob'),ovl=document.getElementById('ovl');
-ham.addEventListener('click',()=>{const op=mob.classList.toggle('op');ovl.classList.toggle('sh',op);ham.classList.toggle('op',op)});
-function cm(){mob.classList.remove('op');ovl.classList.remove('sh');ham.classList.remove('op')}
 
 // FAQ
 function ft(el){const i=el.parentElement;const o=i.classList.contains('op');document.querySelectorAll('.fi').forEach(x=>x.classList.remove('op'));if(!o)i.classList.add('op')}
