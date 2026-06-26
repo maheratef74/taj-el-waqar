@@ -67,6 +67,7 @@ section{position:relative;overflow:hidden}
 @@media(min-width:1024px){.nw{padding:15px 48px}}
 .nl{display:flex;align-items:center;gap:9px;flex-shrink:0}
 .ni{width:36px;height:36px;border-radius:9px;flex-shrink:0;background:linear-gradient(135deg,var(--em),var(--gd));display:flex;align-items:center;justify-content:center;font-size:17px;box-shadow:0 3px 10px rgba(13,92,58,.3)}
+.ni-img{width:36px;height:36px;border-radius:50%;flex-shrink:0;object-fit:cover;border:2px solid rgba(255,255,255,.2)}
 .nn{font-family:var(--fd);font-size:18px;font-weight:700;color:#fff;transition:var(--tr)}
 .nb{font-size:9px;color:var(--gd-l);transition:var(--tr)}
 #nav.sc .nn{color:var(--nv)}
@@ -322,6 +323,7 @@ section{position:relative;overflow:hidden}
   .gi:nth-child(7){grid-column:span 4}
 }
 .gi{border-radius:var(--r2);overflow:hidden;position:relative;cursor:pointer;box-shadow:var(--s0)}
+.gi-img{width:100%;height:100%;object-fit:cover;display:block}
 .gi:hover .giov{opacity:1}
 .giph{background:linear-gradient(145deg,var(--em-d),var(--nv));display:flex;align-items:center;justify-content:center;min-height:110px;height:100%;font-size:30px;color:rgba(255,255,255,.18)}
 @@media(min-width:1024px){.gi:nth-child(1) .giph{min-height:360px}}
@@ -436,7 +438,7 @@ select.fin{appearance:none;cursor:pointer}
 <nav id="nav">
   <div class="nw">
     <div class="nl">
-      <div class="ni">📖</div>
+      <img src="/image/taj-el-waqar-logo.jpg" class="ni-img" alt="تاج الوقار">
       <div>
         <div class="nn">تاج الوقار</div>
         <div class="nb">منصة تحفيظ القرآن</div>
@@ -504,11 +506,7 @@ select.fin{appearance:none;cursor:pointer}
         <a href="#reg" class="bg bg-l"><i class="bi bi-journal-bookmark-fill"></i> سجل الآن</a>
         <a href="#hal" class="bo"><i class="bi bi-search"></i> تصفح الحلقات</a>
       </div>
-      <div class="hss">
-        <div class="hs"><div class="hv">@ViewBag.TotalStudents<span>+</span></div><div class="hl">طالب مُسجَّل</div></div>
-        <div class="hs"><div class="hv">@ViewBag.TotalTeachers<span>+</span></div><div class="hl">معلم متخصص</div></div>
-        <div class="hs"><div class="hv">@ViewBag.TotalMemorizers<span>+</span></div><div class="hl">خريج حافظ</div></div>
-      </div>
+
     </div>
   </div>
   <div class="sci"><div class="sw"><div class="sd"></div></div><span>تمرير للأسفل</span></div>
@@ -667,7 +665,9 @@ select.fin{appearance:none;cursor:pointer}
     <div class="tc rv"><div class="tag">أماكن الحلقات</div><h2 class="st">نلتقي معك في حيّك</h2></div>
     <div class="lg">
       <div class="lc rv rv1">
-        <div class="lm"><div class="pg" style="opacity:.12"></div><div class="lpin">📍</div></div>
+        <div class="lm" style="padding:0;overflow:hidden;height:auto;min-height:220px;background:none">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.1483346973605!2d31.943960362349998!3d26.289290886703427!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x144f4bb6f29adb39%3A0x86de46f2cb09f171!2z2K_ZiNin2LEg2KLZhCDYp9mE2YTYqNmK2K_ZiQ!5e0!3m2!1sar!2seg!4v1782473718511!5m2!1sar!2seg" width="100%" height="100%" style="border:0;display:block;min-height:220px" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
         <div class="li"><div class="lb"><i class="bi bi-geo-alt-fill"></i> فرع نشط</div><div class="ln">دوار اللبيدي</div><div class="ld"><i class="bi bi-clock" style="color:var(--gd)"></i> صباحًا ومساءً<br><i class="bi bi-calendar-week" style="color:var(--gd)"></i> السبت – الخميس<br><i class="bi bi-book" style="color:var(--gd)"></i> @ViewBag.TotalHalaqas حلقات متاحة</div><a href="#hal" class="llk">عرض الحلقات <i class="bi bi-arrow-left"></i></a></div>
       </div>
 
@@ -687,7 +687,7 @@ select.fin{appearance:none;cursor:pointer}
     <div class="pbox rv rv1">
       <div class="ph"><h4>بوابة متابعة الأبناء</h4><p>أدخل رقمك لعرض النتائج</p></div>
       <div class="pr">
-        <input type="tel" id="pinp" class="pi" placeholder="05xxxxxxxx" dir="ltr">
+        <input type="tel" id="pinp" class="pi" placeholder="01**********" dir="ltr">
         <button class="bg" onclick="showStu()"><i class="bi bi-search"></i> تابع الآن</button>
       </div>
       <div class="sw2" id="swrap">
@@ -740,13 +740,18 @@ select.fin{appearance:none;cursor:pointer}
   <div class="w">
     <div class="tc rv"><div class="tag">إنجازاتنا</div><h2 class="st">لحظات تستحق الاحتفاء</h2></div>
     <div class="gg rv">
-      <div class="gi"><div class="giph">🏅</div><div class="giov"><i class="bi bi-zoom-in"></i><span>حفل تخرج الحفاظ ٢٠٢٤</span></div></div>
-      <div class="gi"><div class="giph">📜</div><div class="giov"><i class="bi bi-zoom-in"></i><span>تكريم المتميزين</span></div></div>
-      <div class="gi"><div class="giph">🌟</div><div class="giov"><i class="bi bi-zoom-in"></i><span>المسابقة القرآنية السنوية</span></div></div>
-      <div class="gi"><div class="giph">🎓</div><div class="giov"><i class="bi bi-zoom-in"></i><span>الخريجون الجدد</span></div></div>
-      <div class="gi"><div class="giph">📖</div><div class="giov"><i class="bi bi-zoom-in"></i><span>يوم الختمة القرآنية</span></div></div>
-      <div class="gi"><div class="giph">🕌</div><div class="giov"><i class="bi bi-zoom-in"></i><span>حلقات رمضان</span></div></div>
-      <div class="gi"><div class="giph">✨</div><div class="giov"><i class="bi bi-zoom-in"></i><span>لحظات من رحلة الحفظ</span></div></div>
+      <div class="gi"><img src="/image/t1.jfif" class="gi-img" alt=""><div class="giov"><i class="bi bi-zoom-in"></i><span>حفل تخرج الحفاظ</span></div></div>
+      <div class="gi"><img src="/image/t2.jfif" class="gi-img" alt=""><div class="giov"><i class="bi bi-zoom-in"></i><span>تكريم المتميزين</span></div></div>
+      <div class="gi"><img src="/image/t3.jfif" class="gi-img" alt=""><div class="giov"><i class="bi bi-zoom-in"></i><span>المسابقة القرآنية</span></div></div>
+      <div class="gi"><img src="/image/t4.jfif" class="gi-img" alt=""><div class="giov"><i class="bi bi-zoom-in"></i><span>الخريجون الجدد</span></div></div>
+      <div class="gi"><img src="/image/t5.jfif" class="gi-img" alt=""><div class="giov"><i class="bi bi-zoom-in"></i><span>يوم الختمة القرآنية</span></div></div>
+      <div class="gi"><img src="/image/t6.jfif" class="gi-img" alt=""><div class="giov"><i class="bi bi-zoom-in"></i><span>حلقات رمضان</span></div></div>
+      <div class="gi"><img src="/image/t7.jfif" class="gi-img" alt=""><div class="giov"><i class="bi bi-zoom-in"></i><span>لحظات من رحلة الحفظ</span></div></div>
+      <div class="gi"><img src="/image/t8.jfif" class="gi-img" alt=""><div class="giov"><i class="bi bi-zoom-in"></i><span>أنشطة تفاعلية</span></div></div>
+      <div class="gi"><img src="/image/t9.jfif" class="gi-img" alt=""><div class="giov"><i class="bi bi-zoom-in"></i><span>الوسائل التعليمية</span></div></div>
+      <div class="gi"><img src="/image/t10.jfif" class="gi-img" alt=""><div class="giov"><i class="bi bi-zoom-in"></i><span>زيارة كبار القراء</span></div></div>
+      <div class="gi"><img src="/image/t11.jfif" class="gi-img" alt=""><div class="giov"><i class="bi bi-zoom-in"></i><span>محاضرات تحفيزية</span></div></div>
+      <div class="gi"><img src="/image/t12.jfif" class="gi-img" alt=""><div class="giov"><i class="bi bi-zoom-in"></i><span>الاحتفال بالحفظة</span></div></div>
     </div>
   </div>
 </section>
@@ -771,9 +776,9 @@ select.fin{appearance:none;cursor:pointer}
     <div class="tc rv"><div class="tag">آراء أولياء الأمور</div><h2 class="st">ماذا يقول عنّا أهل الطلاب</h2></div>
     <div class="tcar rv">
       <div class="ttr" id="ttr">
-        <div class="tcard"><div class="tcin"><span class="tcq">"</span><p class="tctx">منذ انضم ابني لمنصة تاج الوقار لاحظتُ تغيرًا كبيرًا في التزامه ومحبته للقرآن. المعلم يتابعه باستمرار ونتائجه في تحسن مستمر.</p><div class="tcau"><div class="tcav" style="background:linear-gradient(135deg,var(--em),var(--gd))">م</div><div><div class="tcn">أم محمد العمري</div><div class="tcr">والدة طالب — دوار اللبيدي</div><div class="tcs">⭐⭐⭐⭐⭐</div></div></div></div></div>
-        <div class="tcard"><div class="tcin"><span class="tcq">"</span><p class="tctx">جرّبنا حلقات كثيرة من قبل لكن تاج الوقار مختلفة تمامًا. الأسلوب محترف والمتابعة منتظمة وابنتي تحفظ بثقة.</p><div class="tcau"><div class="tcav" style="background:linear-gradient(135deg,var(--nv),var(--gd))">أ</div><div><div class="tcn">أبو سارة الزهراني</div><div class="tcr">ولي أمر طالبة — دوار اللبيدي</div><div class="tcs">⭐⭐⭐⭐⭐</div></div></div></div></div>
-        <div class="tcard"><div class="tcin"><span class="tcq">"</span><p class="tctx">ما يميز تاج الوقار هو الشفافية الكاملة. أعرف كل يوم ماذا حفظ ابني وكيف كان أداؤه — هذا أشعرني بالاطمئنان التام.</p><div class="tcau"><div class="tcav" style="background:linear-gradient(135deg,var(--gd),var(--em-d))">خ</div><div><div class="tcn">أم خالد الحربي</div><div class="tcr">والدة طالبَين — دوار اللبيدي</div><div class="tcs">⭐⭐⭐⭐⭐</div></div></div></div></div>
+        <div class="tcard"><div class="tcin"><span class="tcq">"</span><p class="tctx">من يوم ما دخل ابني على تاج الوقار وأنا شايف فرق كبير في التزامه وحبه للقرآن. المعلم بيثبت عليه والنتايج بتتحسن كل يوم.</p><div class="tcau"><div class="tcav" style="background:linear-gradient(135deg,var(--em),var(--gd))">م</div><div><div class="tcn">أم محمد العمري</div><div class="tcr">والدة طالب — دوار اللبيدي</div><div class="tcs">⭐⭐⭐⭐⭐</div></div></div></div></div>
+        <div class="tcard"><div class="tcin"><span class="tcq">"</span><p class="tctx">جربنا حلقات كتير قبل كدا بس تاج الوقار حاجة تانية خالص. الأسلوب محترف والمتابعة منتظمة وبنتي حافظة بثقة من غير خوف.</p><div class="tcau"><div class="tcav" style="background:linear-gradient(135deg,var(--nv),var(--gd))">أ</div><div><div class="tcn">أبو سارة الزهراني</div><div class="tcr">ولي أمر طالبة — دوار اللبيدي</div><div class="tcs">⭐⭐⭐⭐⭐</div></div></div></div></div>
+        <div class="tcard"><div class="tcin"><span class="tcq">"</span><p class="tctx">اللي بيميز تاج الوقار هي الشفافية. بأعرف كل يوم ابني حفظ إيه وذاكر إزاي — ودا مخليّني مرتاح خالص ومطمن على مستواه.</p><div class="tcau"><div class="tcav" style="background:linear-gradient(135deg,var(--gd),var(--em-d))">خ</div><div><div class="tcn">أم خالد الحربي</div><div class="tcr">والدة طالبَين — دوار اللبيدي</div><div class="tcs">⭐⭐⭐⭐⭐</div></div></div></div></div>
       </div>
     </div>
     <div class="tcc rv">
@@ -866,7 +871,7 @@ select.fin{appearance:none;cursor:pointer}
     <div class="ft">
       <div>
         <div style="display:flex;align-items:center;gap:9px;margin-bottom:9px">
-          <div class="ni">📖</div>
+          <img src="/image/taj-el-waqar-logo.jpg" class="ni-img" alt="تاج الوقار" style="width:38px;height:38px;border-radius:50%;object-fit:cover">
           <div><div style="font-family:var(--fd);font-size:18px;font-weight:700;color:#fff">تاج الوقار</div><div style="font-size:9px;color:var(--gd)">منصة تحفيظ القرآن الكريم</div></div>
         </div>
         <p class="fd">منصة متخصصة في تحفيظ القرآن الكريم وتعليم التجويد وبناء جيل مؤمن.</p>
@@ -879,7 +884,7 @@ select.fin{appearance:none;cursor:pointer}
       </div>
       <div><div class="fct">روابط سريعة</div><ul class="flks"><li><a href="#hero">الرئيسية</a></li><li><a href="#about">عن المنصة</a></li><li><a href="#hal">الحلقات المتاحة</a></li><li><a href="#loc">أماكن الحلقات</a></li><li><a href="#ach">الإنجازات</a></li></ul></div>
       <div><div class="fct">الخدمات</div><ul class="flks"><li><a href="#srv">تحفيظ القرآن</a></li><li><a href="#srv">تعليم التجويد</a></li><li><a href="#portal">بوابة ولي الأمر</a></li><li><a href="#reg">التسجيل</a></li><li><a href="#faq">أسئلة شائعة</a></li></ul></div>
-      <div><div class="fct">تواصل معنا</div><ul class="flks"><li><a href="#"><i class="bi bi-telephone" style="color:var(--gd);margin-left:5px"></i> 05xxxxxxxx</a></li><li><a href="#"><i class="bi bi-envelope" style="color:var(--gd);margin-left:5px"></i> info@tajwaqar.com</a></li><li><a href="#"><i class="bi bi-geo-alt" style="color:var(--gd);margin-left:5px"></i> دوار اللبيدي</a></li></ul></div>
+      <div><div class="fct">تواصل معنا</div><ul class="flks"><li><a href="#"><i class="bi bi-telephone" style="color:var(--gd);margin-left:5px"></i> 0 11 02850623</a></li><li><a href="#"><i class="bi bi-envelope" style="color:var(--gd);margin-left:5px"></i> info@tajwaqar.com</a></li><li><a href="#"><i class="bi bi-geo-alt" style="color:var(--gd);margin-left:5px"></i> دوار اللبيدي</a></li></ul></div>
     </div>
     <div class="fb"><div class="fsl">تاج الوقار .. حيث يبدأ طريق أهل القرآن</div><div class="fcp">© ٢٠٢٥ منصة تاج الوقار · جميع الحقوق محفوظة</div></div>
   </div>
@@ -967,9 +972,13 @@ function swT(tabsId,cvId,ti,si,stuId){
 }
 
 // PORTAL - REAL BACKEND
+// Load saved phone
+(function(){try{const p=localStorage.getItem('tajPhone');if(p)document.getElementById('pinp').value=p}catch(e){}})();
+
 function showStu(){
   const v=document.getElementById('pinp').value.replace(/\D/g,'');
   if(v.length>=9){
+    try{localStorage.setItem('tajPhone',v)}catch(e){}
     const wrap=document.getElementById('swrap');
     wrap.innerHTML='<div style="text-align:center;padding:20px;color:rgba(255,255,255,.5)"><i class="bi bi-hourglass-split" style="font-size:24px"></i><br>جاري البحث...</div>';
     wrap.classList.add('sh');
