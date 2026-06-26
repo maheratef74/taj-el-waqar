@@ -60,7 +60,7 @@ section{position:relative;overflow:hidden}
 .pg{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23c9a24b' stroke-width='.7'%3E%3Cpolygon points='30,4 56,19 56,49 30,57 4,49 4,19'/%3E%3Cpolygon points='30,14 46,23 46,43 30,49 14,43 14,23'/%3E%3C/g%3E%3C/svg%3E");background-size:60px}
 
 /* NAV */
-#nav{position:fixed;inset:0 0 auto;z-index:9999;transition:var(--tr)}
+#nav{position:fixed;inset:0 0 auto;z-index:9999;transition:var(--tr),transform .35s ease}
 #nav.sc{background:rgba(255,255,255,.96);backdrop-filter:blur(18px);box-shadow:var(--s1)}
 .nw{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;gap:10px}
 @@media(min-width:640px){.nw{padding:14px 28px}}
@@ -888,7 +888,9 @@ select.fin{appearance:none;cursor:pointer}
       <div><div class="fct">الخدمات</div><ul class="flks"><li><a href="#srv">تحفيظ القرآن</a></li><li><a href="#srv">تعليم التجويد</a></li><li><a href="#portal">بوابة ولي الأمر</a></li><li><a href="#reg">التسجيل</a></li><li><a href="#faq">أسئلة شائعة</a></li></ul></div>
       <div><div class="fct">تواصل معنا</div><ul class="flks"><li><a href="tel:01102850623"><i class="bi bi-telephone" style="color:var(--gd);margin-left:5px"></i> 01102850623</a></li><li><a href="#"><i class="bi bi-envelope" style="color:var(--gd);margin-left:5px"></i> info@tajwaqar.com</a></li><li><a href="#"><i class="bi bi-geo-alt" style="color:var(--gd);margin-left:5px"></i> دوار اللبيدي</a></li></ul></div>
     </div>
-    <div class="fb"><div class="fsl">تاج الوقار .. حيث يبدأ طريق أهل القرآن</div><div class="fcp">© ٢٠٢٥ منصة تاج الوقار · جميع الحقوق محفوظة</div><div style="margin-top:12px;font-size:11px;color:rgba(255,255,255,.35)">تم تطوير هذه المنصة بواسطة <a href="https://wa.me/201205397285" target="_blank" style="color:var(--gd);text-decoration:none;font-weight:700">مهندس / ماهر عاطف اللبيدي</a></div></div>
+    <div class="fb"><div class="fsl">تاج الوقار .. حيث يبدأ طريق أهل القرآن</div><div class="fcp">© ٢٠٢٥ منصة تاج الوقار · جميع الحقوق محفوظة</div></div>
+    <div style="text-align:center;padding:14px 0 18px;font-size:12px;color:rgba(255,255,255,.55);border-top:1px solid rgba(255,255,255,.07)">تم تطوير هذه المنصة بواسطة <a href="https://wa.me/201205397285" target="_blank" style="color:var(--gd);text-decoration:none;font-weight:700">مهندس / ماهر عاطف اللبيدي</a></div>
+    <div style="height:50px"></div>
   </div>
 </footer>
 
@@ -1063,7 +1065,13 @@ document.getElementById('pinp').addEventListener('keydown',e=>{if(e.key==='Enter
 
 // NAV
 const navEl=document.getElementById('nav');
-window.addEventListener('scroll',()=>navEl.classList.toggle('sc',scrollY>52),{passive:true});
+let lastScroll=0;
+window.addEventListener('scroll',()=>{
+  const sy=scrollY;
+  navEl.classList.toggle('sc',sy>52);
+  navEl.style.transform=sy>lastScroll&&sy>80?'translateY(-100%)':'translateY(0)';
+  lastScroll=sy;
+},{passive:true});
 const ham=document.getElementById('nh'),mob=document.getElementById('mob'),ovl=document.getElementById('ovl');
 ham.addEventListener('click',()=>{const op=mob.classList.toggle('op');ovl.classList.toggle('sh',op);ham.classList.toggle('op',op)});
 function cm(){mob.classList.remove('op');ovl.classList.remove('sh');ham.classList.remove('op')}
